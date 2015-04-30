@@ -1,0 +1,31 @@
+﻿#include <ruby.h>
+
+	int rubyargc = 3;
+	char *rubyargv[] = {"ruby.exe", "-e", "printf \"hello\"", NULL};
+	
+	if (0)
+	{
+		ruby_init();
+		ruby_options(rubyargc, rubyargv);
+		ruby_run();
+	}
+	
+	if (1)
+	{
+		//see http://my.opera.com/subjam/blog/embedding-ruby-in-c-programs
+		//see http://aeditor.rubyforge.org/ruby_cplusplus/index.html
+		ruby_init();
+		//rb_eval_string("puts 'hello world'");
+		rb_eval_string("printf 'hello'");
+		ruby_finalize();
+	}
+
+	if (0)
+	{
+		ruby_init();
+		ruby_init_loadpath();
+		rb_load_file("script.rb");
+		ruby_exec();
+		//ruby_run();
+		//ruby_finalize();
+	} 

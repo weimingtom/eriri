@@ -1,0 +1,11 @@
+﻿eval.c:
+search_required()
+rb_load_path
+Init_load()
+
+file.c:
+rb_find_file()
+
+ruby.c:
+ruby_incpush()
+ruby_init_loadpath()

@@ -1,0 +1,6 @@
+onscripter_android.tar.gz/SDL_revision.h
+
+#define SDL_REVISION "hg-4467:0baef09fe702"
+
+hg clone --rev 4467 --verbose http://hg.libsdl.org/SDL "D:\amdroid_rubysdl\work\origin_files\SDL-clone"
+hg clone --rev 0baef09fe702 --verbose http://hg.libsdl.org/SDL "D:\amdroid_rubysdl\work\origin_files\SDL-clone"

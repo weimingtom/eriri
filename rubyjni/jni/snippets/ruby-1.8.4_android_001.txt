@@ -1,0 +1,55 @@
+﻿===
+1. dmyext.c
+---
+void Init_sdl();
+
+void
+Init_ext()
+{
+	//printf("Init_ext\n");
+	Init_sdl();
+}
+===
+2. io.c
+---
+#ifdef ANDROID
+#include <android/log.h>
+#endif
+
+static VALUE
+rb_f_printf(argc, argv)
+    int argc;
+    VALUE argv[];
+{
+    VALUE out;
+
+    if (argc == 0) return Qnil;
+    if (TYPE(argv[0]) == T_STRING) {
+	out = rb_stdout;
+    }
+    else {
+	out = argv[0];
+	argv++;
+	argc--;
+    }
+#ifdef ANDROID    
+    //fprintf(stdout, "rb_f_printf : %s\n", RSTRING(rb_f_sprintf(argc, argv))->ptr);
+    __android_log_print(ANDROID_LOG_INFO, "ruby_io.c", "%s", RSTRING(rb_f_sprintf(argc, argv))->ptr);
+#endif
+    rb_io_write(out, rb_f_sprintf(argc, argv));
+
+    return Qnil;
+}
+===
+3. main.c
+---
+	int i;
+	int rubyargc = 3;
+	char *rubyargv[] = {"ruby.exe", "-e", "print \"hello\"", NULL};
+	/*printf("%d\n", argc);
+	for (i = 0; i < argc; i++)
+	{
+		printf("%s\n", argv[i]);
+	}
+	*/
+===
