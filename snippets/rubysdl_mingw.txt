@@ -1,0 +1,316 @@
+rm -f  array.o bignum.o class.o compar.o dir.o  dln.o enum.o error.o eval.o file.o gc.o  hash.o inits.o io.o marshal.o math.o  numeric.o object.o pack.o parse.o  process.o prec.o random.o range.o  re.o regex.o ruby.o signal.o sprintf.o  st.o string.o struct.o time.o util.o  variable.o version.o  dmyext.o win32/win32.o *.a ruby.exe
+make -C ../freetype-2.3.12 clean
+make[1]: Entering directory `/home/Administrator/rubysdl/freetype-2.3.12'
+rm -f libfreetype.a  src/base/ftsystem.o src/base/ftdebug.o src/base/ftinit.o src/base/ftbase.o src/base/ftbbox.o src/base/ftbdf.o src/base/ftbitmap.o src/base/ftcid.o src/base/ftfstype.o src/base/ftgasp.o src/base/ftglyph.o src/base/ftgxval.o src/base/ftlcdfil.o src/base/ftmm.o src/base/ftotval.o src/base/ftpatent.o src/base/ftpfr.o src/base/ftstroke.o src/base/ftsynth.o src/base/fttype1.o src/base/ftwinfnt.o src/base/ftxf86.o  src/truetype/truetype.o src/type1/type1.o src/cff/cff.o src/cid/type1cid.o src/pfr/pfr.o src/type42/type42.o src/winfonts/winfnt.o src/pcf/pcf.o src/bdf/bdf.o src/sfnt/sfnt.o src/autofit/autofit.o src/pshinter/pshinter.o src/raster/raster.o src/smooth/smooth.o src/cache/ftcache.o src/gzip/ftgzip.o src/lzw/ftlzw.o src/psaux/psaux.o src/psnames/psmodule.o
+make[1]: Leaving directory `/home/Administrator/rubysdl/freetype-2.3.12'
+make -C ../SDL-1.2.15 clean
+make[1]: Entering directory `/home/Administrator/rubysdl/SDL-1.2.15'
+rm -f libSDL.a src/SDL.o src/SDL_error.o src/SDL_fatal.o src/audio/SDL_audio.o src/audio/SDL_audiocvt.o src/audio/SDL_audiodev.o src/audio/SDL_mixer.o src/audio/SDL_mixer_m68k.o src/audio/SDL_mixer_MMX.o src/audio/SDL_mixer_MMX_VC.o src/audio/SDL_wave.o src/cdrom/SDL_cdrom.o src/cpuinfo/SDL_cpuinfo.o src/events/SDL_active.o src/events/SDL_events.o src/events/SDL_expose.o src/events/SDL_keyboard.o src/events/SDL_mouse.o src/events/SDL_quit.o src/events/SDL_resize.o src/file/SDL_rwops.o src/joystick/SDL_joystick.o src/stdlib/SDL_getenv.o src/stdlib/SDL_iconv.o src/stdlib/SDL_malloc.o src/stdlib/SDL_qsort.o src/stdlib/SDL_stdlib.o src/stdlib/SDL_string.o src/thread/SDL_thread.o src/timer/SDL_timer.o src/video/SDL_blit.o src/video/SDL_blit_0.o src/video/SDL_blit_1.o src/video/SDL_blit_A.o src/video/SDL_blit_N.o src/video/SDL_bmp.o src/video/SDL_cursor.o src/video/SDL_gamma.o src/video/SDL_pixels.o src/video/SDL_RLEaccel.o src/video/SDL_stretch.o src/video/SDL_surface.o src/video/SDL_video.o src/video/SDL_yuv.o src/video/SDL_yuv_mmx.o src/video/SDL_yuv_sw.o src/audio/dummy/SDL_dummyaudio.o src/audio/windib/SDL_dibaudio.o src/audio/disk/SDL_diskaudio.o src/video/dummy/SDL_nullevents.o  src/video/dummy/SDL_nullmouse.o src/video/dummy/SDL_nullvideo.o src/video/windib/SDL_dibevents.o src/video/windib/SDL_dibvideo.o src/video/wincommon/SDL_sysevents.o src/video/wincommon/SDL_sysmouse.o src/video/wincommon/SDL_syswm.o src/video/wincommon/SDL_wingl.o src/joystick/win32/SDL_mmjoystick.o src/cdrom/win32/SDL_syscdrom.o src/thread/win32/SDL_sysmutex.o src/thread/win32/SDL_syssem.o src/thread/win32/SDL_systhread.o src/timer/win32/SDL_systimer.o src/loadso/win32/SDL_sysloadso.o
+make[1]: Leaving directory `/home/Administrator/rubysdl/SDL-1.2.15'
+make -C ../SDL2-2.0.1 clean
+make[1]: Entering directory `/home/Administrator/rubysdl/SDL2-2.0.1'
+rm -rf libSDL2.a src/SDL.o src/SDL_assert.o src/SDL_error.o src/SDL_hints.o src/SDL_log.o src/audio/SDL_audio.o src/audio/SDL_audiocvt.o src/audio/SDL_audiodev.o src/audio/SDL_audiotypecvt.o src/audio/SDL_mixer.o src/audio/SDL_wave.o src/audio/dummy/SDL_dummyaudio.o src/audio/winmm/SDL_winmm.o src/audio/disk/SDL_diskaudio.o src/cpuinfo/SDL_cpuinfo.o src/events/SDL_clipboardevents.o src/events/SDL_dropevents.o src/events/SDL_events.o src/events/SDL_gesture.o src/events/SDL_keyboard.o src/events/SDL_mouse.o src/events/SDL_quit.o src/events/SDL_touch.o src/events/SDL_windowevents.o src/file/SDL_rwops.o src/haptic/SDL_haptic.o src/haptic/dummy/SDL_syshaptic.o src/joystick/SDL_gamecontroller.o src/joystick/SDL_joystick.o src/joystick/dummy/SDL_sysjoystick.o src/loadso/windows/SDL_sysloadso.o src/power/SDL_power.o src/power/windows/SDL_syspower.o src/filesystem/windows/SDL_sysfilesystem.o src/render/SDL_render.o src/render/SDL_yuv_mmx.o src/render/SDL_yuv_sw.o src/render/software/SDL_blendfillrect.o src/render/software/SDL_blendline.o src/render/software/SDL_blendpoint.o src/render/software/SDL_drawline.o src/render/software/SDL_drawpoint.o src/render/software/SDL_render_sw.o src/render/software/SDL_rotate.o src/render/opengl/SDL_render_gl.o src/render/opengl/SDL_shaders_gl.o src/stdlib/SDL_getenv.o src/stdlib/SDL_iconv.o src/stdlib/SDL_malloc.o src/stdlib/SDL_qsort.o src/stdlib/SDL_stdlib.o src/stdlib/SDL_string.o src/thread/SDL_thread.o src/thread/windows/SDL_sysmutex.o src/thread/windows/SDL_syssem.o src/thread/windows/SDL_systhread.o src/thread/windows/SDL_systls.o src/timer/SDL_timer.o src/timer/windows/SDL_systimer.o src/video/SDL_RLEaccel.o src/video/SDL_blit.o src/video/SDL_blit_0.o src/video/SDL_blit_1.o src/video/SDL_blit_A.o src/video/SDL_blit_N.o src/video/SDL_blit_auto.o src/video/SDL_blit_copy.o src/video/SDL_blit_slow.o src/video/SDL_bmp.o src/video/SDL_clipboard.o src/video/SDL_egl.o src/video/SDL_fillrect.o src/video/SDL_pixels.o src/video/SDL_rect.o src/video/SDL_shape.o src/video/SDL_stretch.o src/video/SDL_surface.o src/video/SDL_video.o src/video/dummy/SDL_nullevents.o src/video/dummy/SDL_nullframebuffer.o src/video/dummy/SDL_nullvideo.o src/video/windows/SDL_windowsclipboard.o src/video/windows/SDL_windowsevents.o src/video/windows/SDL_windowsframebuffer.o src/video/windows/SDL_windowskeyboard.o src/video/windows/SDL_windowsmessagebox.o src/video/windows/SDL_windowsmodes.o src/video/windows/SDL_windowsmouse.o src/video/windows/SDL_windowsopengl.o src/video/windows/SDL_windowsshape.o src/video/windows/SDL_windowsvideo.o src/video/windows/SDL_windowswindow.o src/core/windows/SDL_windows.o src/libm/e_atan2.o src/libm/e_log.o src/libm/e_pow.o src/libm/e_rem_pio2.o src/libm/e_sqrt.o src/libm/k_cos.o src/libm/k_rem_pio2.o src/libm/k_sin.o src/libm/s_atan.o src/libm/s_copysign.o src/libm/s_cos.o src/libm/s_fabs.o src/libm/s_floor.o src/libm/s_scalbn.o src/libm/s_sin.o src/atomic/SDL_atomic.o src/atomic/SDL_spinlock.o 
+rm -rf libSDL2main.a src/main/windows/SDL_windows_main.o 
+rm -rf test/testspriteminimal.exe test/testspriteminimal.o
+rm -rf Xcode-iOS/Demos/data/rectangles.exe Xcode-iOS/Demos/src/rectangles.o Xcode-iOS/Demos/src/common.o
+rm -rf Xcode-iOS/Demos/data/happy.exe Xcode-iOS/Demos/src/happy.o Xcode-iOS/Demos/src/common.o
+rm -rf Xcode-iOS/Demos/data/fireworks.exe Xcode-iOS/Demos/src/fireworks.o Xcode-iOS/Demos/src/common.o
+rm -rf Xcode-iOS/Demos/data/accelerometer.exe Xcode-iOS/Demos/src/accelerometer.o Xcode-iOS/Demos/src/common.o
+rm -rf Xcode-iOS/Demos/data/keyboard.exe Xcode-iOS/Demos/src/keyboard.o Xcode-iOS/Demos/src/common.o
+rm -rf Xcode-iOS/Demos/data/touch.exe Xcode-iOS/Demos/src/touch.o Xcode-iOS/Demos/src/common.o
+rm -rf Xcode-iOS/Demos/data/mixer.exe Xcode-iOS/Demos/src/mixer.o Xcode-iOS/Demos/src/common.o
+make[1]: Leaving directory `/home/Administrator/rubysdl/SDL2-2.0.1'
+make -C ../SDL-1.3 clean
+make[1]: Entering directory `/home/Administrator/rubysdl/SDL-1.3'
+rm -f libSDL.a src/SDL.o src/SDL_error.o src/SDL_fatal.o src/audio/SDL_audio.o src/audio/SDL_audiocvt.o src/audio/SDL_audiodev.o src/audio/SDL_mixer.o src/audio/SDL_mixer_m68k.o src/audio/SDL_mixer_MMX.o src/audio/SDL_mixer_MMX_VC.o src/audio/SDL_wave.o src/audio/SDL_audiotypecvt.o src/cpuinfo/SDL_cpuinfo.o src/events/SDL_events.o src/events/SDL_keyboard.o src/events/SDL_mouse.o src/events/SDL_quit.o src/events/SDL_windowevents.o  src/file/SDL_rwops.o src/joystick/SDL_joystick.o src/stdlib/SDL_getenv.o src/stdlib/SDL_iconv.o src/stdlib/SDL_malloc.o src/stdlib/SDL_qsort.o src/stdlib/SDL_stdlib.o src/stdlib/SDL_string.o src/thread/SDL_thread.o src/timer/SDL_timer.o src/video/SDL_blit.o src/video/SDL_blit_0.o src/video/SDL_blit_1.o src/video/SDL_blit_A.o src/video/SDL_blit_N.o src/video/SDL_bmp.o src/video/SDL_gamma.o src/video/SDL_pixels.o src/video/SDL_RLEaccel.o src/video/SDL_stretch.o src/video/SDL_surface.o src/video/SDL_video.o src/video/SDL_yuv_mmx.o src/video/SDL_yuv_sw.o src/video/SDL_alphamult.o  src/video/SDL_blendfillrect.o src/video/SDL_blendline.o src/video/SDL_blendpoint.o src/video/SDL_blendrect.o src/video/SDL_blendrect.o src/video/SDL_blit_auto.o src/video/SDL_blit_copy.o src/video/SDL_blit_slow.o src/video/SDL_drawline.o src/video/SDL_drawpoint.o src/video/SDL_drawrect.o src/video/SDL_fillrect.o src/video/SDL_rect.o src/video/SDL_renderer_gl.o src/video/SDL_renderer_gles.o src/video/SDL_renderer_sw.o src/video/SDL_renderer_gl.o src/audio/dummy/SDL_dummyaudio.o src/audio/windib/SDL_dibaudio.o src/audio/disk/SDL_diskaudio.o src/video/dummy/SDL_nullevents.o  src/video/dummy/SDL_nullrender.o src/video/dummy/SDL_nullvideo.o src/video/win32/SDL_ceddrawrender.o src/video/win32/SDL_d3drender.o src/video/win32/SDL_gapirender.o src/video/win32/SDL_gdirender.o src/video/win32/SDL_win32events.o src/video/win32/SDL_win32gamma.o src/video/win32/SDL_win32keyboard.o src/video/win32/SDL_win32modes.o src/video/win32/SDL_win32mouse.o src/video/win32/SDL_win32opengl.o src/video/win32/SDL_win32video.o src/video/win32/SDL_win32window.o src/joystick/win32/SDL_mmjoystick.o src/thread/win32/SDL_sysmutex.o src/thread/win32/SDL_syssem.o src/thread/win32/SDL_systhread.o src/timer/win32/SDL_systimer.o src/loadso/win32/SDL_sysloadso.o src/power/windows/SDL_syspower.o src/atomic/win32/SDL_atomic.o src/libm/e_log.o src/libm/e_pow.o src/libm/e_rem_pio2.o src/libm/e_sqrt.o src/libm/k_cos.o src/libm/k_rem_pio2.o src/libm/k_sin.o src/libm/s_copysign.o src/libm/s_cos.o src/libm/s_fabs.o src/libm/s_floor.o src/libm/s_scalbn.o src/libm/s_sin.o src/SDL_assert.o src/SDL_compat.o
+make[1]: Leaving directory `/home/Administrator/rubysdl/SDL-1.3'
+make -C ../SDL_ttf-2.0.9 clean
+make[1]: Entering directory `/home/Administrator/rubysdl/SDL_ttf-2.0.9'
+rm -f libSDL_ttf.a  SDL_ttf.o
+make[1]: Leaving directory `/home/Administrator/rubysdl/SDL_ttf-2.0.9'
+make -C ../SDL_image-1.2.12 clean
+make[1]: Entering directory `/home/Administrator/rubysdl/SDL_image-1.2.12'
+rm -f libSDL_image.a  IMG.o IMG_bmp.o IMG_gif.o IMG_jpg.o IMG_lbm.o IMG_pcx.o IMG_png.o IMG_pnm.o IMG_tga.o IMG_tif.o IMG_webp.o IMG_xcf.o IMG_xpm.o IMG_xv.o IMG_xxx.o
+make[1]: Leaving directory `/home/Administrator/rubysdl/SDL_image-1.2.12'
+make -C ../sge030809 clean
+make[1]: Entering directory `/home/Administrator/rubysdl/sge030809'
+rm -f libSGE.a  sge_blib.o sge_bm_text.o sge_collision.o sge_misc.o sge_primitives.o sge_rotation.o sge_shape.o sge_surface.o sge_textpp.o sge_tt_text.o
+make[1]: Leaving directory `/home/Administrator/rubysdl/sge030809'
+make -C ../rubysdl-2.1.0 clean
+make[1]: Entering directory `/home/Administrator/rubysdl/rubysdl-2.1.0'
+rm -f  rubysdl_cdrom.o rubysdl_event.o rubysdl_event_key.o rubysdl_image.o rubysdl_joystick.o rubysdl_kanji.o rubysdl_main.o rubysdl_mixer.o rubysdl_mouse.o rubysdl_opengl.o rubysdl_pixel.o rubysdl_rwops.o rubysdl_sdlskk.o rubysdl_sge_video.o rubysdl_smpeg.o rubysdl_time.o rubysdl_ttf.o rubysdl_video.o rubysdl_wm.o SDL_kanji.o librubysdl.a
+make[1]: Leaving directory `/home/Administrator/rubysdl/rubysdl-2.1.0'
+gcc   -g -O2  -I.  -o array.o -c array.c
+gcc   -g -O2  -I.  -o bignum.o -c bignum.c
+gcc   -g -O2  -I.  -o class.o -c class.c
+gcc   -g -O2  -I.  -o compar.o -c compar.c
+gcc   -g -O2  -I.  -o dir.o -c dir.c
+gcc   -g -O2  -I.  -o dln.o -c dln.c
+gcc   -g -O2  -I.  -o enum.o -c enum.c
+gcc   -g -O2  -I.  -o error.o -c error.c
+gcc   -g -O2  -I.  -o eval.o -c eval.c
+gcc   -g -O2  -I.  -o file.o -c file.c
+gcc   -g -O2  -I.  -o gc.o -c gc.c
+gcc   -g -O2  -I.  -o hash.o -c hash.c
+gcc   -g -O2  -I.  -o inits.o -c inits.c
+gcc   -g -O2  -I.  -o io.o -c io.c
+gcc   -g -O2  -I.  -o marshal.o -c marshal.c
+gcc   -g -O2  -I.  -o math.o -c math.c
+gcc   -g -O2  -I.  -o numeric.o -c numeric.c
+gcc   -g -O2  -I.  -o object.o -c object.c
+gcc   -g -O2  -I.  -o pack.o -c pack.c
+gcc   -g -O2  -I.  -o parse.o -c parse.c
+gcc   -g -O2  -I.  -o process.o -c process.c
+gcc   -g -O2  -I.  -o prec.o -c prec.c
+gcc   -g -O2  -I.  -o random.o -c random.c
+gcc   -g -O2  -I.  -o range.o -c range.c
+gcc   -g -O2  -I.  -o re.o -c re.c
+gcc   -g -O2  -I.  -o regex.o -c regex.c
+gcc   -g -O2  -I.  -o ruby.o -c ruby.c
+gcc   -g -O2  -I.  -o signal.o -c signal.c
+gcc   -g -O2  -I.  -o sprintf.o -c sprintf.c
+gcc   -g -O2  -I.  -o st.o -c st.c
+gcc   -g -O2  -I.  -o string.o -c string.c
+gcc   -g -O2  -I.  -o struct.o -c struct.c
+gcc   -g -O2  -I.  -o time.o -c time.c
+gcc   -g -O2  -I.  -o util.o -c util.c
+gcc   -g -O2  -I.  -o variable.o -c variable.c
+gcc   -g -O2  -I.  -o version.o -c version.c
+gcc   -g -O2  -I.  -o dmyext.o -c dmyext.c
+gcc   -g -O2  -I.  -o win32/win32.o -c win32/win32.c
+ar rcu  libruby.a  array.o bignum.o class.o compar.o dir.o  dln.o enum.o error.o eval.o file.o gc.o  hash.o inits.o io.o marshal.o math.o  numeric.o object.o pack.o parse.o  process.o prec.o random.o range.o  re.o regex.o ruby.o signal.o sprintf.o  st.o string.o struct.o time.o util.o  variable.o version.o  dmyext.o win32/win32.o 
+ranlib libruby.a
+make -C ../rubysdl-2.1.0
+make[1]: Entering directory `/home/Administrator/rubysdl/rubysdl-2.1.0'
+gcc   -g -O2 -DENABLE_OPENGL -DHAVE_SGE -DHAVE_SDL_TTF -I../ruby-1.8.4 -I../SDL-1.3/include -I../SDL_ttf-2.0.9 -I../SDL_image-1.2.12 -I../sge030809 -o rubysdl_cdrom.o -c rubysdl_cdrom.c
+gcc   -g -O2 -DENABLE_OPENGL -DHAVE_SGE -DHAVE_SDL_TTF -I../ruby-1.8.4 -I../SDL-1.3/include -I../SDL_ttf-2.0.9 -I../SDL_image-1.2.12 -I../sge030809 -o rubysdl_event.o -c rubysdl_event.c
+gcc   -g -O2 -DENABLE_OPENGL -DHAVE_SGE -DHAVE_SDL_TTF -I../ruby-1.8.4 -I../SDL-1.3/include -I../SDL_ttf-2.0.9 -I../SDL_image-1.2.12 -I../sge030809 -o rubysdl_event_key.o -c rubysdl_event_key.c
+gcc   -g -O2 -DENABLE_OPENGL -DHAVE_SGE -DHAVE_SDL_TTF -I../ruby-1.8.4 -I../SDL-1.3/include -I../SDL_ttf-2.0.9 -I../SDL_image-1.2.12 -I../sge030809 -o rubysdl_image.o -c rubysdl_image.c
+gcc   -g -O2 -DENABLE_OPENGL -DHAVE_SGE -DHAVE_SDL_TTF -I../ruby-1.8.4 -I../SDL-1.3/include -I../SDL_ttf-2.0.9 -I../SDL_image-1.2.12 -I../sge030809 -o rubysdl_joystick.o -c rubysdl_joystick.c
+gcc   -g -O2 -DENABLE_OPENGL -DHAVE_SGE -DHAVE_SDL_TTF -I../ruby-1.8.4 -I../SDL-1.3/include -I../SDL_ttf-2.0.9 -I../SDL_image-1.2.12 -I../sge030809 -o rubysdl_kanji.o -c rubysdl_kanji.c
+gcc   -g -O2 -DENABLE_OPENGL -DHAVE_SGE -DHAVE_SDL_TTF -I../ruby-1.8.4 -I../SDL-1.3/include -I../SDL_ttf-2.0.9 -I../SDL_image-1.2.12 -I../sge030809 -o rubysdl_main.o -c rubysdl_main.c
+gcc   -g -O2 -DENABLE_OPENGL -DHAVE_SGE -DHAVE_SDL_TTF -I../ruby-1.8.4 -I../SDL-1.3/include -I../SDL_ttf-2.0.9 -I../SDL_image-1.2.12 -I../sge030809 -o rubysdl_mixer.o -c rubysdl_mixer.c
+gcc   -g -O2 -DENABLE_OPENGL -DHAVE_SGE -DHAVE_SDL_TTF -I../ruby-1.8.4 -I../SDL-1.3/include -I../SDL_ttf-2.0.9 -I../SDL_image-1.2.12 -I../sge030809 -o rubysdl_mouse.o -c rubysdl_mouse.c
+gcc   -g -O2 -DENABLE_OPENGL -DHAVE_SGE -DHAVE_SDL_TTF -I../ruby-1.8.4 -I../SDL-1.3/include -I../SDL_ttf-2.0.9 -I../SDL_image-1.2.12 -I../sge030809 -o rubysdl_opengl.o -c rubysdl_opengl.c
+gcc   -g -O2 -DENABLE_OPENGL -DHAVE_SGE -DHAVE_SDL_TTF -I../ruby-1.8.4 -I../SDL-1.3/include -I../SDL_ttf-2.0.9 -I../SDL_image-1.2.12 -I../sge030809 -o rubysdl_pixel.o -c rubysdl_pixel.c
+gcc   -g -O2 -DENABLE_OPENGL -DHAVE_SGE -DHAVE_SDL_TTF -I../ruby-1.8.4 -I../SDL-1.3/include -I../SDL_ttf-2.0.9 -I../SDL_image-1.2.12 -I../sge030809 -o rubysdl_rwops.o -c rubysdl_rwops.c
+rubysdl_rwops.c: In function `rubysdl_RWops_from_ruby_obj':
+rubysdl_rwops.c:117: warning: assignment from incompatible pointer type
+rubysdl_rwops.c:118: warning: assignment from incompatible pointer type
+rubysdl_rwops.c:119: warning: assignment from incompatible pointer type
+gcc   -g -O2 -DENABLE_OPENGL -DHAVE_SGE -DHAVE_SDL_TTF -I../ruby-1.8.4 -I../SDL-1.3/include -I../SDL_ttf-2.0.9 -I../SDL_image-1.2.12 -I../sge030809 -o rubysdl_sdlskk.o -c rubysdl_sdlskk.c
+gcc   -g -O2 -DENABLE_OPENGL -DHAVE_SGE -DHAVE_SDL_TTF -I../ruby-1.8.4 -I../SDL-1.3/include -I../SDL_ttf-2.0.9 -I../SDL_image-1.2.12 -I../sge030809 -o rubysdl_sge_video.o -c rubysdl_sge_video.c
+gcc   -g -O2 -DENABLE_OPENGL -DHAVE_SGE -DHAVE_SDL_TTF -I../ruby-1.8.4 -I../SDL-1.3/include -I../SDL_ttf-2.0.9 -I../SDL_image-1.2.12 -I../sge030809 -o rubysdl_smpeg.o -c rubysdl_smpeg.c
+gcc   -g -O2 -DENABLE_OPENGL -DHAVE_SGE -DHAVE_SDL_TTF -I../ruby-1.8.4 -I../SDL-1.3/include -I../SDL_ttf-2.0.9 -I../SDL_image-1.2.12 -I../sge030809 -o rubysdl_time.o -c rubysdl_time.c
+gcc   -g -O2 -DENABLE_OPENGL -DHAVE_SGE -DHAVE_SDL_TTF -I../ruby-1.8.4 -I../SDL-1.3/include -I../SDL_ttf-2.0.9 -I../SDL_image-1.2.12 -I../sge030809 -o rubysdl_ttf.o -c rubysdl_ttf.c
+gcc   -g -O2 -DENABLE_OPENGL -DHAVE_SGE -DHAVE_SDL_TTF -I../ruby-1.8.4 -I../SDL-1.3/include -I../SDL_ttf-2.0.9 -I../SDL_image-1.2.12 -I../sge030809 -o rubysdl_video.o -c rubysdl_video.c
+gcc   -g -O2 -DENABLE_OPENGL -DHAVE_SGE -DHAVE_SDL_TTF -I../ruby-1.8.4 -I../SDL-1.3/include -I../SDL_ttf-2.0.9 -I../SDL_image-1.2.12 -I../sge030809 -o rubysdl_wm.o -c rubysdl_wm.c
+rubysdl_wm.c: In function `WM_s_caption':
+rubysdl_wm.c:27: warning: passing arg 1 of `SDL_WM_GetCaption' from incompatible pointer type
+rubysdl_wm.c:27: warning: passing arg 2 of `SDL_WM_GetCaption' from incompatible pointer type
+gcc   -g -O2 -DENABLE_OPENGL -DHAVE_SGE -DHAVE_SDL_TTF -I../ruby-1.8.4 -I../SDL-1.3/include -I../SDL_ttf-2.0.9 -I../SDL_image-1.2.12 -I../sge030809 -o SDL_kanji.o -c SDL_kanji.c
+ar rcu  librubysdl.a  rubysdl_cdrom.o rubysdl_event.o rubysdl_event_key.o rubysdl_image.o rubysdl_joystick.o rubysdl_kanji.o rubysdl_main.o rubysdl_mixer.o rubysdl_mouse.o rubysdl_opengl.o rubysdl_pixel.o rubysdl_rwops.o rubysdl_sdlskk.o rubysdl_sge_video.o rubysdl_smpeg.o rubysdl_time.o rubysdl_ttf.o rubysdl_video.o rubysdl_wm.o SDL_kanji.o 
+ranlib librubysdl.a
+make[1]: Leaving directory `/home/Administrator/rubysdl/rubysdl-2.1.0'
+make -C ../sge030809
+make[1]: Entering directory `/home/Administrator/rubysdl/sge030809'
+g++  -g -O2  -I../SDL-1.3/include -I../SDL_image-1.2.12  -I../freetype-2.3.12/include  -c -o sge_blib.o sge_blib.cpp
+g++  -g -O2  -I../SDL-1.3/include -I../SDL_image-1.2.12  -I../freetype-2.3.12/include  -c -o sge_bm_text.o sge_bm_text.cpp
+g++  -g -O2  -I../SDL-1.3/include -I../SDL_image-1.2.12  -I../freetype-2.3.12/include  -c -o sge_collision.o sge_collision.cpp
+g++  -g -O2  -I../SDL-1.3/include -I../SDL_image-1.2.12  -I../freetype-2.3.12/include  -c -o sge_misc.o sge_misc.cpp
+g++  -g -O2  -I../SDL-1.3/include -I../SDL_image-1.2.12  -I../freetype-2.3.12/include  -c -o sge_primitives.o sge_primitives.cpp
+g++  -g -O2  -I../SDL-1.3/include -I../SDL_image-1.2.12  -I../freetype-2.3.12/include  -c -o sge_rotation.o sge_rotation.cpp
+g++  -g -O2  -I../SDL-1.3/include -I../SDL_image-1.2.12  -I../freetype-2.3.12/include  -c -o sge_shape.o sge_shape.cpp
+g++  -g -O2  -I../SDL-1.3/include -I../SDL_image-1.2.12  -I../freetype-2.3.12/include  -c -o sge_surface.o sge_surface.cpp
+g++  -g -O2  -I../SDL-1.3/include -I../SDL_image-1.2.12  -I../freetype-2.3.12/include  -c -o sge_textpp.o sge_textpp.cpp
+g++  -g -O2  -I../SDL-1.3/include -I../SDL_image-1.2.12  -I../freetype-2.3.12/include  -c -o sge_tt_text.o sge_tt_text.cpp
+ar cr libSGE.a sge_blib.o sge_bm_text.o sge_collision.o sge_misc.o sge_primitives.o sge_rotation.o sge_shape.o sge_surface.o sge_textpp.o sge_tt_text.o
+ranlib libSGE.a
+make[1]: Leaving directory `/home/Administrator/rubysdl/sge030809'
+make -C ../SDL_image-1.2.12
+make[1]: Entering directory `/home/Administrator/rubysdl/SDL_image-1.2.12'
+gcc -g -O2 -DLOAD_BMP -I../SDL-1.3/include -g -O2 -DLOAD_BMP -I../SDL-1.3/include  -c -o IMG.o IMG.c
+gcc -g -O2 -DLOAD_BMP -I../SDL-1.3/include -g -O2 -DLOAD_BMP -I../SDL-1.3/include  -c -o IMG_bmp.o IMG_bmp.c
+gcc -g -O2 -DLOAD_BMP -I../SDL-1.3/include -g -O2 -DLOAD_BMP -I../SDL-1.3/include  -c -o IMG_gif.o IMG_gif.c
+gcc -g -O2 -DLOAD_BMP -I../SDL-1.3/include -g -O2 -DLOAD_BMP -I../SDL-1.3/include  -c -o IMG_jpg.o IMG_jpg.c
+gcc -g -O2 -DLOAD_BMP -I../SDL-1.3/include -g -O2 -DLOAD_BMP -I../SDL-1.3/include  -c -o IMG_lbm.o IMG_lbm.c
+gcc -g -O2 -DLOAD_BMP -I../SDL-1.3/include -g -O2 -DLOAD_BMP -I../SDL-1.3/include  -c -o IMG_pcx.o IMG_pcx.c
+gcc -g -O2 -DLOAD_BMP -I../SDL-1.3/include -g -O2 -DLOAD_BMP -I../SDL-1.3/include  -c -o IMG_png.o IMG_png.c
+gcc -g -O2 -DLOAD_BMP -I../SDL-1.3/include -g -O2 -DLOAD_BMP -I../SDL-1.3/include  -c -o IMG_pnm.o IMG_pnm.c
+gcc -g -O2 -DLOAD_BMP -I../SDL-1.3/include -g -O2 -DLOAD_BMP -I../SDL-1.3/include  -c -o IMG_tga.o IMG_tga.c
+gcc -g -O2 -DLOAD_BMP -I../SDL-1.3/include -g -O2 -DLOAD_BMP -I../SDL-1.3/include  -c -o IMG_tif.o IMG_tif.c
+gcc -g -O2 -DLOAD_BMP -I../SDL-1.3/include -g -O2 -DLOAD_BMP -I../SDL-1.3/include  -c -o IMG_webp.o IMG_webp.c
+gcc -g -O2 -DLOAD_BMP -I../SDL-1.3/include -g -O2 -DLOAD_BMP -I../SDL-1.3/include  -c -o IMG_xcf.o IMG_xcf.c
+gcc -g -O2 -DLOAD_BMP -I../SDL-1.3/include -g -O2 -DLOAD_BMP -I../SDL-1.3/include  -c -o IMG_xpm.o IMG_xpm.c
+gcc -g -O2 -DLOAD_BMP -I../SDL-1.3/include -g -O2 -DLOAD_BMP -I../SDL-1.3/include  -c -o IMG_xv.o IMG_xv.c
+gcc -g -O2 -DLOAD_BMP -I../SDL-1.3/include -g -O2 -DLOAD_BMP -I../SDL-1.3/include  -c -o IMG_xxx.o IMG_xxx.c
+ar cr libSDL_image.a IMG.o IMG_bmp.o IMG_gif.o IMG_jpg.o IMG_lbm.o IMG_pcx.o IMG_png.o IMG_pnm.o IMG_tga.o IMG_tif.o IMG_webp.o IMG_xcf.o IMG_xpm.o IMG_xv.o IMG_xxx.o
+ranlib libSDL_image.a
+make[1]: Leaving directory `/home/Administrator/rubysdl/SDL_image-1.2.12'
+make -C ../SDL_ttf-2.0.9
+make[1]: Entering directory `/home/Administrator/rubysdl/SDL_ttf-2.0.9'
+gcc -g -O2  -I../SDL-1.3/include -I../freetype-2.3.12/include -g -O2  -I../SDL-1.3/include -I../freetype-2.3.12/include  -c -o SDL_ttf.o SDL_ttf.c
+ar cr libSDL_ttf.a SDL_ttf.o
+ranlib libSDL_ttf.a
+make[1]: Leaving directory `/home/Administrator/rubysdl/SDL_ttf-2.0.9'
+make -C ../SDL-1.3
+make[1]: Entering directory `/home/Administrator/rubysdl/SDL-1.3'
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/SDL.o src/SDL.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/SDL_error.o src/SDL_error.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/SDL_fatal.o src/SDL_fatal.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/audio/SDL_audio.o src/audio/SDL_audio.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/audio/SDL_audiocvt.o src/audio/SDL_audiocvt.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/audio/SDL_audiodev.o src/audio/SDL_audiodev.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/audio/SDL_mixer.o src/audio/SDL_mixer.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/audio/SDL_mixer_m68k.o src/audio/SDL_mixer_m68k.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/audio/SDL_mixer_MMX.o src/audio/SDL_mixer_MMX.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/audio/SDL_mixer_MMX_VC.o src/audio/SDL_mixer_MMX_VC.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/audio/SDL_wave.o src/audio/SDL_wave.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/audio/SDL_audiotypecvt.o src/audio/SDL_audiotypecvt.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/cpuinfo/SDL_cpuinfo.o src/cpuinfo/SDL_cpuinfo.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/events/SDL_events.o src/events/SDL_events.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/events/SDL_keyboard.o src/events/SDL_keyboard.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/events/SDL_mouse.o src/events/SDL_mouse.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/events/SDL_quit.o src/events/SDL_quit.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/events/SDL_windowevents.o src/events/SDL_windowevents.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/file/SDL_rwops.o src/file/SDL_rwops.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/joystick/SDL_joystick.o src/joystick/SDL_joystick.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/stdlib/SDL_getenv.o src/stdlib/SDL_getenv.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/stdlib/SDL_iconv.o src/stdlib/SDL_iconv.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/stdlib/SDL_malloc.o src/stdlib/SDL_malloc.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/stdlib/SDL_qsort.o src/stdlib/SDL_qsort.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/stdlib/SDL_stdlib.o src/stdlib/SDL_stdlib.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/stdlib/SDL_string.o src/stdlib/SDL_string.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/thread/SDL_thread.o src/thread/SDL_thread.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/timer/SDL_timer.o src/timer/SDL_timer.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/video/SDL_blit.o src/video/SDL_blit.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/video/SDL_blit_0.o src/video/SDL_blit_0.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/video/SDL_blit_1.o src/video/SDL_blit_1.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/video/SDL_blit_A.o src/video/SDL_blit_A.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/video/SDL_blit_N.o src/video/SDL_blit_N.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/video/SDL_bmp.o src/video/SDL_bmp.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/video/SDL_gamma.o src/video/SDL_gamma.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/video/SDL_pixels.o src/video/SDL_pixels.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/video/SDL_RLEaccel.o src/video/SDL_RLEaccel.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/video/SDL_stretch.o src/video/SDL_stretch.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/video/SDL_surface.o src/video/SDL_surface.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/video/SDL_video.o src/video/SDL_video.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/video/SDL_yuv_mmx.o src/video/SDL_yuv_mmx.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/video/SDL_yuv_sw.o src/video/SDL_yuv_sw.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/video/SDL_alphamult.o src/video/SDL_alphamult.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/video/SDL_blendfillrect.o src/video/SDL_blendfillrect.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/video/SDL_blendline.o src/video/SDL_blendline.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/video/SDL_blendpoint.o src/video/SDL_blendpoint.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/video/SDL_blendrect.o src/video/SDL_blendrect.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/video/SDL_blit_auto.o src/video/SDL_blit_auto.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/video/SDL_blit_copy.o src/video/SDL_blit_copy.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/video/SDL_blit_slow.o src/video/SDL_blit_slow.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/video/SDL_drawline.o src/video/SDL_drawline.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/video/SDL_drawpoint.o src/video/SDL_drawpoint.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/video/SDL_drawrect.o src/video/SDL_drawrect.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/video/SDL_fillrect.o src/video/SDL_fillrect.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/video/SDL_rect.o src/video/SDL_rect.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/video/SDL_renderer_gl.o src/video/SDL_renderer_gl.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/video/SDL_renderer_gles.o src/video/SDL_renderer_gles.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/video/SDL_renderer_sw.o src/video/SDL_renderer_sw.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/audio/dummy/SDL_dummyaudio.o src/audio/dummy/SDL_dummyaudio.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/audio/windib/SDL_dibaudio.o src/audio/windib/SDL_dibaudio.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/audio/disk/SDL_diskaudio.o src/audio/disk/SDL_diskaudio.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/video/dummy/SDL_nullevents.o src/video/dummy/SDL_nullevents.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/video/dummy/SDL_nullrender.o src/video/dummy/SDL_nullrender.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/video/dummy/SDL_nullvideo.o src/video/dummy/SDL_nullvideo.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/video/win32/SDL_ceddrawrender.o src/video/win32/SDL_ceddrawrender.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/video/win32/SDL_d3drender.o src/video/win32/SDL_d3drender.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/video/win32/SDL_gapirender.o src/video/win32/SDL_gapirender.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/video/win32/SDL_gdirender.o src/video/win32/SDL_gdirender.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/video/win32/SDL_win32events.o src/video/win32/SDL_win32events.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/video/win32/SDL_win32gamma.o src/video/win32/SDL_win32gamma.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/video/win32/SDL_win32keyboard.o src/video/win32/SDL_win32keyboard.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/video/win32/SDL_win32modes.o src/video/win32/SDL_win32modes.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/video/win32/SDL_win32mouse.o src/video/win32/SDL_win32mouse.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/video/win32/SDL_win32opengl.o src/video/win32/SDL_win32opengl.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/video/win32/SDL_win32video.o src/video/win32/SDL_win32video.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/video/win32/SDL_win32window.o src/video/win32/SDL_win32window.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/joystick/win32/SDL_mmjoystick.o src/joystick/win32/SDL_mmjoystick.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/thread/win32/SDL_sysmutex.o src/thread/win32/SDL_sysmutex.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/thread/win32/SDL_syssem.o src/thread/win32/SDL_syssem.c
+src/thread/win32/SDL_syssem.c: In function `SDL_SemWaitTimeout':
+src/thread/win32/SDL_syssem.c:112: warning: passing arg 1 of `InterlockedDecrement' from incompatible pointer type
+src/thread/win32/SDL_syssem.c: In function `SDL_SemPost':
+src/thread/win32/SDL_syssem.c:161: warning: passing arg 1 of `InterlockedIncrement' from incompatible pointer type
+src/thread/win32/SDL_syssem.c:167: warning: passing arg 1 of `InterlockedDecrement' from incompatible pointer type
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/thread/win32/SDL_systhread.o src/thread/win32/SDL_systhread.c
+src/thread/win32/SDL_systhread.c: In function `SDL_SYS_CreateThread':
+src/thread/win32/SDL_systhread.c:117: warning: initialization from incompatible pointer type
+src/thread/win32/SDL_systhread.c:136: warning: passing arg 3 of pointer to function from incompatible pointer type
+src/thread/win32/SDL_systhread.c:139: warning: passing arg 6 of `CreateThread' from incompatible pointer type
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/timer/win32/SDL_systimer.o src/timer/win32/SDL_systimer.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/loadso/win32/SDL_sysloadso.o src/loadso/win32/SDL_sysloadso.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/power/windows/SDL_syspower.o src/power/windows/SDL_syspower.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/atomic/win32/SDL_atomic.o src/atomic/win32/SDL_atomic.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/libm/e_log.o src/libm/e_log.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/libm/e_pow.o src/libm/e_pow.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/libm/e_rem_pio2.o src/libm/e_rem_pio2.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/libm/e_sqrt.o src/libm/e_sqrt.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/libm/k_cos.o src/libm/k_cos.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/libm/k_rem_pio2.o src/libm/k_rem_pio2.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/libm/k_sin.o src/libm/k_sin.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/libm/s_copysign.o src/libm/s_copysign.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/libm/s_cos.o src/libm/s_cos.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/libm/s_fabs.o src/libm/s_fabs.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/libm/s_floor.o src/libm/s_floor.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/libm/s_scalbn.o src/libm/s_scalbn.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/libm/s_sin.o src/libm/s_sin.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/SDL_assert.o src/SDL_assert.c
+gcc -g -O2   -I./include -g -O2   -I./include  -c -o src/SDL_compat.o src/SDL_compat.c
+ar cr libSDL.a src/SDL.o src/SDL_error.o src/SDL_fatal.o src/audio/SDL_audio.o src/audio/SDL_audiocvt.o src/audio/SDL_audiodev.o src/audio/SDL_mixer.o src/audio/SDL_mixer_m68k.o src/audio/SDL_mixer_MMX.o src/audio/SDL_mixer_MMX_VC.o src/audio/SDL_wave.o src/audio/SDL_audiotypecvt.o src/cpuinfo/SDL_cpuinfo.o src/events/SDL_events.o src/events/SDL_keyboard.o src/events/SDL_mouse.o src/events/SDL_quit.o src/events/SDL_windowevents.o src/file/SDL_rwops.o src/joystick/SDL_joystick.o src/stdlib/SDL_getenv.o src/stdlib/SDL_iconv.o src/stdlib/SDL_malloc.o src/stdlib/SDL_qsort.o src/stdlib/SDL_stdlib.o src/stdlib/SDL_string.o src/thread/SDL_thread.o src/timer/SDL_timer.o src/video/SDL_blit.o src/video/SDL_blit_0.o src/video/SDL_blit_1.o src/video/SDL_blit_A.o src/video/SDL_blit_N.o src/video/SDL_bmp.o src/video/SDL_gamma.o src/video/SDL_pixels.o src/video/SDL_RLEaccel.o src/video/SDL_stretch.o src/video/SDL_surface.o src/video/SDL_video.o src/video/SDL_yuv_mmx.o src/video/SDL_yuv_sw.o src/video/SDL_alphamult.o src/video/SDL_blendfillrect.o src/video/SDL_blendline.o src/video/SDL_blendpoint.o src/video/SDL_blendrect.o src/video/SDL_blit_auto.o src/video/SDL_blit_copy.o src/video/SDL_blit_slow.o src/video/SDL_drawline.o src/video/SDL_drawpoint.o src/video/SDL_drawrect.o src/video/SDL_fillrect.o src/video/SDL_rect.o src/video/SDL_renderer_gl.o src/video/SDL_renderer_gles.o src/video/SDL_renderer_sw.o src/audio/dummy/SDL_dummyaudio.o src/audio/windib/SDL_dibaudio.o src/audio/disk/SDL_diskaudio.o src/video/dummy/SDL_nullevents.o src/video/dummy/SDL_nullrender.o src/video/dummy/SDL_nullvideo.o src/video/win32/SDL_ceddrawrender.o src/video/win32/SDL_d3drender.o src/video/win32/SDL_gapirender.o src/video/win32/SDL_gdirender.o src/video/win32/SDL_win32events.o src/video/win32/SDL_win32gamma.o src/video/win32/SDL_win32keyboard.o src/video/win32/SDL_win32modes.o src/video/win32/SDL_win32mouse.o src/video/win32/SDL_win32opengl.o src/video/win32/SDL_win32video.o src/video/win32/SDL_win32window.o src/joystick/win32/SDL_mmjoystick.o src/thread/win32/SDL_sysmutex.o src/thread/win32/SDL_syssem.o src/thread/win32/SDL_systhread.o src/timer/win32/SDL_systimer.o src/loadso/win32/SDL_sysloadso.o src/power/windows/SDL_syspower.o src/atomic/win32/SDL_atomic.o src/libm/e_log.o src/libm/e_pow.o src/libm/e_rem_pio2.o src/libm/e_sqrt.o src/libm/k_cos.o src/libm/k_rem_pio2.o src/libm/k_sin.o src/libm/s_copysign.o src/libm/s_cos.o src/libm/s_fabs.o src/libm/s_floor.o src/libm/s_scalbn.o src/libm/s_sin.o src/SDL_assert.o src/SDL_compat.o
+ranlib libSDL.a
+make[1]: Leaving directory `/home/Administrator/rubysdl/SDL-1.3'
+make -C ../freetype-2.3.12
+make[1]: Entering directory `/home/Administrator/rubysdl/freetype-2.3.12'
+gcc -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include  -c -o src/base/ftsystem.o src/base/ftsystem.c
+gcc -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include  -c -o src/base/ftdebug.o src/base/ftdebug.c
+gcc -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include  -c -o src/base/ftinit.o src/base/ftinit.c
+gcc -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include  -c -o src/base/ftbase.o src/base/ftbase.c
+gcc -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include  -c -o src/base/ftbbox.o src/base/ftbbox.c
+gcc -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include  -c -o src/base/ftbdf.o src/base/ftbdf.c
+gcc -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include  -c -o src/base/ftbitmap.o src/base/ftbitmap.c
+gcc -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include  -c -o src/base/ftcid.o src/base/ftcid.c
+gcc -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include  -c -o src/base/ftfstype.o src/base/ftfstype.c
+gcc -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include  -c -o src/base/ftgasp.o src/base/ftgasp.c
+gcc -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include  -c -o src/base/ftglyph.o src/base/ftglyph.c
+gcc -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include  -c -o src/base/ftgxval.o src/base/ftgxval.c
+gcc -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include  -c -o src/base/ftlcdfil.o src/base/ftlcdfil.c
+gcc -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include  -c -o src/base/ftmm.o src/base/ftmm.c
+gcc -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include  -c -o src/base/ftotval.o src/base/ftotval.c
+gcc -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include  -c -o src/base/ftpatent.o src/base/ftpatent.c
+gcc -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include  -c -o src/base/ftpfr.o src/base/ftpfr.c
+gcc -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include  -c -o src/base/ftstroke.o src/base/ftstroke.c
+gcc -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include  -c -o src/base/ftsynth.o src/base/ftsynth.c
+gcc -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include  -c -o src/base/fttype1.o src/base/fttype1.c
+gcc -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include  -c -o src/base/ftwinfnt.o src/base/ftwinfnt.c
+gcc -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include  -c -o src/base/ftxf86.o src/base/ftxf86.c
+gcc -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include  -c -o src/truetype/truetype.o src/truetype/truetype.c
+gcc -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include  -c -o src/type1/type1.o src/type1/type1.c
+gcc -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include  -c -o src/cff/cff.o src/cff/cff.c
+gcc -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include  -c -o src/cid/type1cid.o src/cid/type1cid.c
+gcc -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include  -c -o src/pfr/pfr.o src/pfr/pfr.c
+gcc -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include  -c -o src/type42/type42.o src/type42/type42.c
+gcc -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include  -c -o src/winfonts/winfnt.o src/winfonts/winfnt.c
+gcc -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include  -c -o src/pcf/pcf.o src/pcf/pcf.c
+gcc -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include  -c -o src/bdf/bdf.o src/bdf/bdf.c
+gcc -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include  -c -o src/sfnt/sfnt.o src/sfnt/sfnt.c
+gcc -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include  -c -o src/autofit/autofit.o src/autofit/autofit.c
+gcc -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include  -c -o src/pshinter/pshinter.o src/pshinter/pshinter.c
+gcc -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include  -c -o src/raster/raster.o src/raster/raster.c
+gcc -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include  -c -o src/smooth/smooth.o src/smooth/smooth.c
+gcc -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include  -c -o src/cache/ftcache.o src/cache/ftcache.c
+gcc -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include  -c -o src/gzip/ftgzip.o src/gzip/ftgzip.c
+gcc -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include  -c -o src/lzw/ftlzw.o src/lzw/ftlzw.c
+gcc -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include  -c -o src/psaux/psaux.o src/psaux/psaux.c
+gcc -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include -g -O2  -DFT_CONFIG_CONFIG_H="<ftconfig.h>"  -DFT2_BUILD_LIBRARY  -DFT_CONFIG_MODULES_H="<ftmodule.h>" -I./objs -I./builds/unix -I./include  -c -o src/psnames/psmodule.o src/psnames/psmodule.c
+ar cr libfreetype.a src/base/ftsystem.o src/base/ftdebug.o src/base/ftinit.o src/base/ftbase.o src/base/ftbbox.o src/base/ftbdf.o src/base/ftbitmap.o src/base/ftcid.o src/base/ftfstype.o src/base/ftgasp.o src/base/ftglyph.o src/base/ftgxval.o src/base/ftlcdfil.o src/base/ftmm.o src/base/ftotval.o src/base/ftpatent.o src/base/ftpfr.o src/base/ftstroke.o src/base/ftsynth.o src/base/fttype1.o src/base/ftwinfnt.o src/base/ftxf86.o src/truetype/truetype.o src/type1/type1.o src/cff/cff.o src/cid/type1cid.o src/pfr/pfr.o src/type42/type42.o src/winfonts/winfnt.o src/pcf/pcf.o src/bdf/bdf.o src/sfnt/sfnt.o src/autofit/autofit.o src/pshinter/pshinter.o src/raster/raster.o src/smooth/smooth.o src/cache/ftcache.o src/gzip/ftgzip.o src/lzw/ftlzw.o src/psaux/psaux.o src/psnames/psmodule.o
+ranlib libfreetype.a
+make[1]: Leaving directory `/home/Administrator/rubysdl/freetype-2.3.12'
+gcc   -g -O2  -I.  -o ruby.exe main.c libruby.a ../rubysdl-2.1.0/librubysdl.a ../sge030809/libSGE.a ../SDL_image-1.2.12/libSDL_image.a ../SDL_ttf-2.0.9/libSDL_ttf.a ../SDL-1.3/libSDL.a ../freetype-2.3.12/libfreetype.a -lm -lws2_32 -luser32 -lgdi32 -lwinmm -lmsimg32 -lstdc++
+strip ruby.exe

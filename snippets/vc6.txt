@@ -1,0 +1,428 @@
+﻿eval.c:
+
+void
+ruby_init()
+{
+    static int initialized = 0;
+    static struct FRAME frame;
+    static struct iter iter;
+    int state;
+
+->    if (initialized)
+------------------
+eval.c:
+
+    Init_stack((void*)&state);
+    Init_heap();
+    PUSH_SCOPE();
+    ruby_scope->local_vars = 0;
+    ruby_scope->local_tbl  = 0;
+    top_scope = ruby_scope;
+    /* default visibility is private at toplevel */
+    SCOPE_SET(SCOPE_PRIVATE);
+
+    PUSH_TAG(PROT_NONE);
+->    if ((state = EXEC_TAG()) == 0) {
+
+
+------------------
+object.c:
+
+    rb_cData = rb_define_class("Data", rb_cObject);
+    rb_undef_alloc_func(rb_cData);
+
+->    rb_global_variable(&ruby_top_self);
+    
+------------------
+eval.c:
+
+static void
+error_print()
+{
+    VALUE errat = Qnil;		/* OK */
+    volatile VALUE eclass, e;
+    char *einfo;
+    long elen;
+
+    if (NIL_P(ruby_errinfo)) return;
+
+->    PUSH_TAG(PROT_NONE);
+    
+------------------
+
+io.c:
+
+
+static VALUE
+io_write(io, str)
+    VALUE io, str;
+{
+    OpenFile *fptr;
+    long n;
+
+->    rb_secure(4);
+    
+  
+  
+----------------
+
+eval.c:
+
+
+	ep = RARRAY(errat);
+	for (i=1; i<ep->len; i++) {
+	    if (TYPE(ep->ptr[i]) == T_STRING) {
+		warn_printf("\tfrom %s\n", RSTRING(ep->ptr[i])->ptr);
+	    }
+	    if (i == TRACE_HEAD && ep->len > TRACE_MAX) {
+		warn_printf("\t ... %ld levels...\n",
+			ep->len - TRACE_HEAD - TRACE_TAIL);
+		i = ep->len - TRACE_TAIL;
+	    }
+	}
+    }
+  error:
+->    POP_TAG();
+    
+-----------------
+
+ruby.c:
+
+
+static void
+load_file(fname, script)
+    const char *fname;
+    int script;
+{
+    extern VALUE rb_stdin;
+    VALUE f;
+    int line_start = 1;
+
+    if (!fname) rb_load_fail(fname);
+    if (strcmp(fname, "-") == 0) {
+	f = rb_stdin;
+    }
+    else {
+	FILE *fp = fopen(fname, "r");
+
+	if (fp == NULL) {
+->	    rb_load_fail(fname);
+	}
+	fclose(fp);
+	
+------------------
+parse.y:
+
+NODE*
+rb_compile_file(f, file, start)
+    const char *f;
+    VALUE file;
+    int start;
+{
+    lex_gets = rb_io_gets;
+->    lex_input = file;
+    
+----------------
+
+parse.y:
+  
+static VALUE
+lex_getline()
+{
+    VALUE line = (*lex_gets)(lex_input);
+    if (ruby_debug_lines && !NIL_P(line)) {
+	rb_ary_push(ruby_debug_lines, line);
+    }
+    return line;
+}
+
+----------------
+
+io.c:
+
+VALUE
+rb_io_gets(io)
+    VALUE io;
+{
+    OpenFile *fptr;
+
+->    GetOpenFile(io, fptr);
+    rb_io_check_readable(fptr);
+    return rb_io_getline_fast(fptr, '\n');
+}
+
+
+
+---------------
+parse.c:
+
+static int
+->yylex()
+
+
+static inline int
+nextc()
+{
+->    int c;
+    
+--------------
+
+  yyn = yypact[yystate];
+  if (yyn == YYFLAG)
+    goto yydefault;
+
+  /* Not known => get a lookahead token if don't already have one.  */
+
+  /* yychar is either YYEMPTY or YYEOF
+     or a valid token in external form.  */
+
+  if (yychar == YYEMPTY)
+    {
+      YYDPRINTF ((stderr, "Reading a token: "));
+	  printf("parse.c: %d, %d\n", yychar, ruby_yychar); 
+->      yychar = YYLEX;
+    }
+
+//YYLEX=====>yylex()
+
+--------------
+
+static VALUE
+lex_getline()
+{
+    VALUE line = (*lex_gets)(lex_input);
+->	if (!NIL_P(line)) {
+		const char *line_str = RSTRING(line)->ptr;
+		printf("lex_getline : %s\n", line_str);
+	}
+    if (ruby_debug_lines && !NIL_P(line)) {
+	rb_ary_push(ruby_debug_lines, line);
+    }
+    return line;
+}
+
+-------------
+io.c:
+
+static VALUE
+rb_f_print(argc, argv)
+    int argc;
+    VALUE *argv;
+{
+->    rb_io_print(argc, argv, rb_stdout);
+    return Qnil;
+}
+
+----------------
+eval.c:
+
+打印调用的方法轨迹
+
+static VALUE
+rb_call(klass, recv, mid, argc, argv, scope)
+    VALUE klass, recv;
+    ID    mid;
+    int argc;			/* OK */
+    const VALUE *argv;		/* OK */
+    int scope;
+{
+    NODE  *body;		/* OK */
+    int    noex;
+    ID     id = mid;
+    struct cache_entry *ent;
+
+->	printf("====>eval.c:rb_call : %s\n", rb_id2name(mid));
+	
+-------------
+eval.c:
+
+方法定义缺失：
+
+static VALUE
+method_missing(obj, id, argc, argv, call_status)
+    VALUE obj;
+    ID    id;
+    int   argc;
+    const VALUE *argv;
+    int   call_status;
+{
+
+
+error.c ->NameError.new.str
+/* :nodoc: */
+static VALUE
+name_err_mesg_new(obj, mesg, recv, method)
+    VALUE obj, mesg, recv, method;
+{
+    VALUE *ptr = ALLOC_N(VALUE, 3);
+
+    ptr[0] = mesg;
+    ptr[1] = recv;
+    ptr[2] = method;
+    return Data_Wrap_Struct(rb_cNameErrorMesg, name_err_mesg_mark, -1, ptr);
+}
+
+跳到异常处理
+
+static void
+rb_longjmp(tag, mesg)
+    int tag;
+    VALUE mesg;
+{
+    VALUE at;
+
+    if (thread_set_raised()) {
+	ruby_errinfo = exception_error;
+	JUMP_TAG(TAG_FATAL);
+    }
+    if (NIL_P(mesg)) mesg = ruby_errinfo;
+    if (NIL_P(mesg)) {
+	mesg = rb_exc_new(rb_eRuntimeError, 0, 0);
+    }
+
+    ruby_set_current_source();
+    if (ruby_sourcefile && !NIL_P(mesg)) {
+->	at = get_backtrace(mesg);
+	if (NIL_P(at)) {
+	    at = make_backtrace();
+->	    set_backtrace(mesg, at);
+	}
+    }
+    if (!NIL_P(mesg)) {
+	ruby_errinfo = mesg;
+    }
+    
+    
+    
+指定调试变量，用于rb_longjmp打印堆栈
+	ruby_debug = Qtrue;
+    ruby_verbose = Qtrue;
+    
+--------------
+eval.c
+加载失败
+
+
+static void
+load_failed(fname)
+    VALUE fname;
+{
+->    rb_raise(rb_eLoadError, "no such file to load -- %s", RSTRING(fname)->ptr);
+}
+
+
+--------------
+
+vc6调试字符串
+((RString *)fname)->ptr
+
+
+-------------
+eval.c
+
+require扫描当前目录./
+
+static int
+search_required(fname, featurep, path)
+    VALUE fname, *featurep, *path;
+    
+先执行N次rb_find_file_ext
+最后再执行rb_find_file
+    
+    
+VALUE
+rb_find_file(path)
+    VALUE path;
+{
+    VALUE tmp;
+    char *f = StringValueCStr(path);
+    char *lpath;
+    
+...
+    
+扫描目录集合lpath
+->     lpath = RSTRING(tmp)->ptr;
+	    if (rb_safe_level() >= 1 && !rb_path_check(lpath)) {
+		rb_raise(rb_eSecurityError, "loading from unsafe path %s", lpath);
+	    }
+	    
+
+--------------
+file.c
+
+VALUE
+rb_find_file(path)
+    VALUE path;
+{
+...
+
+此处的函数dln_find_file把fib.rb变成./fib.rb
+
+    if (!lpath) {
+	return 0;		/* no path, no load */
+    }
+->    f = dln_find_file(f, lpath);
+    if (rb_safe_level() >= 1 && !fpa
+    
+
+
+跳到dln_find_1
+
+dln.c
+
+static char *
+dln_find_1(fname, path, exe_flag)
+    char *fname;
+    char *path;
+    int exe_flag;		/* non 0 if looking for executable. */
+{
+    register char *dp;
+    register char *ep;
+    register char *bp;
+    struct stat st;
+#ifdef __MACOS__
+    const char* mac_fullpath;
+#endif
+
+-------------------
+static char *
+dln_find_1(fname, path, exe_flag)
+    char *fname;
+    char *path;
+    int exe_flag;		/* non 0 if looking for executable. */
+{
+
+...
+
+//用stat和_macruby_exist_file_in_libdir_as_posix_name判断require加载的库是否可以加载
+
+#ifndef __MACOS__
+	if (stat(fbuf, &st) == 0) {
+	    if (exe_flag == 0) return fbuf;
+	    /* looking for executable */
+	    if (!S_ISDIR(st.st_mode) && eaccess(fbuf, X_OK) == 0)
+		return fbuf;
+	}
+#else
+	if (mac_fullpath = _macruby_exist_file_in_libdir_as_posix_name(fbuf)) {
+	    if (exe_flag == 0) return mac_fullpath;
+	    /* looking for executable */
+	    if (stat(mac_fullpath, &st) == 0) {
+		if (!S_ISDIR(st.st_mode) && eaccess(mac_fullpath, X_OK) == 0)
+		    return mac_fullpath;
+	    }
+	}
+#endif
+
+--------------------
+方便VC6调试：
+
+inits.c:
+
+注释掉这一行，防止调用signal和rb_bug
+//Init_signal();
+
+
+
+--------------------
+

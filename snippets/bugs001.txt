@@ -1,0 +1,10 @@
+in `write': stack level too deep
+
+03-22 00:33:14.319: E/ruby_io.c(1881): (eval)
+03-22 00:33:14.319: E/ruby_io.c(1881): : 
+03-22 00:33:14.319: E/ruby_io.c(1881): (eval):0:in `write': stack level too deep
+03-22 00:33:14.319: E/ruby_io.c(1881):  (
+03-22 00:33:14.319: E/ruby_io.c(1881): SystemStackError
+03-22 00:33:14.319: E/ruby_io.c(1881): )
+03-22 00:33:14.319: E/ruby_io.c(1881): 	from (eval):0
+
