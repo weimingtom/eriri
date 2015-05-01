@@ -1,2 +1,5 @@
 * crash stack is not printed
 * ruby crash will cause android app crash
+
+* android第二次加载后不能正确require
+

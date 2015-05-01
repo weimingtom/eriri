@@ -10,10 +10,10 @@ extern "C" {
 /*
  * Class:     com_iteye_weimingtom_rubyjni_RubyJNI
  * Method:    exec
- * Signature: (I)I
+ * Signature: (Ljava/lang/String;)I
  */
 JNIEXPORT jint JNICALL Java_com_iteye_weimingtom_rubyjni_RubyJNI_exec
-  (JNIEnv *, jobject, jint);
+  (JNIEnv *, jobject, jstring);
 
 #ifdef __cplusplus
 }

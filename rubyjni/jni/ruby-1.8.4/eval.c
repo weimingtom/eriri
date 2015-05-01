@@ -1304,8 +1304,12 @@ ruby_init()
     static struct iter iter;
     int state;
 
+#if RUBY_INIT_REENTRANT
+	initialized = 0;
+	ruby_running = 0;
+#endif
     if (initialized)
-	return;
+		return;
     initialized = 1;
 #ifdef HAVE_NATIVETHREAD
     ruby_thid = NATIVETHREAD_CURRENT();
@@ -1524,7 +1528,9 @@ ruby_cleanup(ex)
     POP_ITER();
     ruby_errinfo = err;
     ex = error_handle(ex);
+#if RUBY_INIT_REENTRANT
     ruby_finalize_1();
+#endif
     POP_TAG();
 
     if (err && rb_obj_is_kind_of(err, rb_eSystemExit)) {
@@ -5888,6 +5894,7 @@ rb_call(klass, recv, mid, argc, argv, scope)
     //	"[%s:%d %s]%s", __FILE__, __LINE__, __FUNCTION__, rb_id2name(mid));
 #else
     //printf("====>eval.c:rb_call : %s\n", rb_id2name(mid));
+    //printf(">%s<", rb_id2name(mid));
     //fflush(stdout);
 #endif
     if (!klass) {
@@ -6206,8 +6213,13 @@ rb_backtrace()
 
     ary = backtrace(-1);
     for (i=0; i<RARRAY(ary)->len; i++) {
+#ifdef ANDROID
+	__android_log_print(ANDROID_LOG_INFO, "ruby_eval.c",
+		"[%s:%d %s]\tfrom %s", __FILE__, __LINE__, __FUNCTION__,
+		RSTRING(RARRAY(ary)->ptr[i])->ptr);
+#endif
 	printf("\tfrom %s\n", RSTRING(RARRAY(ary)->ptr[i])->ptr);
-    }
+	}
 }
 
 static VALUE
@@ -7010,6 +7022,15 @@ rb_require_safe(fname, safe)
     } volatile saved;
     char *volatile ftptr = 0;
 
+#ifdef ANDROID
+    //if (!NIL_P(fname)) {
+    //	__android_log_print(ANDROID_LOG_INFO, "ruby_eval.c",
+    //		"[%s:%d %s]%s", __FILE__, __LINE__, __FUNCTION__, RSTRING(fname)->ptr);
+    //}
+#else
+    //printf("====>eval.c:rb_require : %s\n", RSTRING(fname)->ptr);
+    //fflush(stdout);
+#endif
     if (OBJ_TAINTED(fname)) {
 	rb_check_safe_obj(fname);
     }

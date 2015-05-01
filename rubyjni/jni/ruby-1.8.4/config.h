@@ -401,3 +401,10 @@
 
 //for vc6 debug
 #define DEBUG_NO_SIGNAL 0
+
+//for calling ruby_init multi times, 
+// and skip rb_gc_call_finalizer_at_exit()
+#define RUBY_INIT_REENTRANT 0
+
+//vc6 memory leak detect
+#define USE_VC6_MEMORY_LEAK 0

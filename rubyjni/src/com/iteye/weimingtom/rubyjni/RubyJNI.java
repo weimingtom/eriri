@@ -9,6 +9,7 @@ import android.content.Context;
 import android.util.Log;
 
 public class RubyJNI {
+	private static final boolean D = true;
 	private static final String TAG = "RubyJNI";
 	
 	private static final String FIB_RUBY = 
@@ -24,7 +25,7 @@ public class RubyJNI {
 			"print(fib(20), \"\\n\");\n" + 
 			"print(\"Hello, world !\")";
 	
-	public native int exec(int x);
+	public native int exec(String filename);
 	
 	static {
 		System.loadLibrary("application");
@@ -86,7 +87,9 @@ public class RubyJNI {
 				}
 			}
 		}
-		//Log.e(TAG, "readfile return ====> " + sb.toString());
+		if (D) {
+			Log.e(TAG, "readfile " + filename + " return ====> " + sb.toString());
+		}
 		return sb.toString();
     }
 	
@@ -114,11 +117,15 @@ public class RubyJNI {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				//Log.e(TAG, "isfileexist return 1 : " + filename);
+				if (D) {
+					Log.e(TAG, "isfileexist return 1 : " + filename);
+				}
 				return 1;
 			}
 		}
-		//Log.e(TAG, "isfileexist return 0 : " + filename);
+		if (D) {
+			Log.e(TAG, "isfileexist return 0 : " + filename);
+		}
 		return 0;
 	}
 }

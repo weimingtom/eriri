@@ -1,4 +1,8 @@
-﻿eval.c:
+﻿调用打印：eval.c => rb_call()
+常量打印：parse.c => rb_intern()
+require打印（如果加载过，以后不会实际读取内容）：eval.c => rb_require_safe()
+----------------
+eval.c:
 
 void
 ruby_init()
@@ -425,4 +429,140 @@ inits.c:
 
 
 --------------------
+
+如果在退出时调用gc，会导致下次进入虚拟机时调用堆栈溢出（write被重复调用）
+rb_gc_call_finalizer_at_exit
+
+-------------------
+堆栈溢出，重复调用const_missing
+
+
+const_missing() line 1219
+rb_const_get_0() line 1429 + 13 bytes
+rb_const_get(unsigned long 11690736, unsigned long 9897) line 1445 + 17 bytes
+rb_method_missing() line 5501 + 50 bytes
+method_missing() line 5528 + 17 bytes
+rb_call(unsigned long 12949360, unsigned long 12949432, unsigned long 3889, int 2, const unsigned long * 0x0012fae0, int 1) line 5914 + 35 bytes
+rb_funcall2(unsigned long 12949432, unsigned long 3889, int 2, const unsigned long * 0x0012fae0) line 6070 + 36 bytes
+method_missing() line 5539 + 27 bytes
+rb_call(unsigned long 12949360, unsigned long 12949432, unsigned long 2993, int 1, const unsigned long * 0x0012fc08, int 1) line 5914 + 35 bytes
+vafuncall() line 6011 + 36 bytes
+rb_funcall(unsigned long 12949432, unsigned long 2993, int 1) line 6028 + 21 bytes
+rb_add_method(unsigned long 12949432, unsigned long 9889, RNode * 0x00c596c8, int 2) line 408 + 28 bytes
+rb_define_private_method(unsigned long 12949432, const char * 0x00578480 `string', unsigned long (void)* 0x0046b420 rb_obj_dummy(void), int 0) line 839 + 45 bytes
+Init_Object() line 2600 + 24 bytes
+rb_call_inits() line 55
+ruby_init() line 1337
+main() line 95
+mainCRTStartup() line 206 + 25 bytes
+KERNEL32! 7c816037()
+
+---------------------
+
+打印所有常量创建
+
+parse.c:
+
+
+ID
+rb_intern(name)
+    const char *name;
+{
+    const char *m = name;
+    ID id;
+    int last;
+
+#if 1
+	fprintf(stdout, "rb_intern: %s\n", name);
+	fflush(stdout);
+#endif
+
+
+---------------------
+
+eval.c
+
+第一次加载时rb_features长度为0，第二次加载时
+添加到rb_features表，
+详细见
+rb_require_safe
+->
+found = search_required(fname, &feature, &path);
+->
+search_required
+->
+if (rb_feature_p(ftptr, ext, !--type)) break;
+
+
+static char *
+rb_feature_p(feature, ext, rb)
+    const char *feature, *ext;
+    int rb;
+{
+    VALUE v;
+    char *f, *e;
+    long i, len, elen;
+
+    if (ext) {
+	len = ext - feature;
+	elen = strlen(ext);
+    }
+    else {
+	len = strlen(feature);
+	elen = 0;
+    }
+->    for (i = 0; i < RARRAY(rb_features)->len; ++i) {
+
+--------------------
+$LOADED_FEATURES
+相当于
+rb_features
+是当前已加载require的缓存表，如果加载过就忽略掉
+
+
+http://docs.ruby-lang.org/ja/search/query:$LOADED_FEATURES/
+
+Kernel$$LOADED_FEATURES -> [String] (15101)
+1.8.7 1.9.3 2.0.0 2.1.0 2.2.0
+変数
+Kernel.#require でロードされたファイル名を含む配列です。
+
+Kernel.#require でロードされたファイル名を含む配列です。
+
+Kernel.#require で同じファイルを
+複数回ロードしないようにするためのロックとして使われます。
+
+この変数はグローバルスコープです。
+
+--------------------
+rb_require打印
+
+VALUE
+rb_require_safe(fname, safe)
+    VALUE fname;
+    int safe;
+{
+    VALUE result = Qnil;
+    volatile VALUE errinfo = ruby_errinfo;
+    int state;
+    struct {
+	NODE *node;
+	ID func;
+	int vmode, safe;
+    } volatile saved;
+    char *volatile ftptr = 0;
+
+#ifdef ANDROID
+    if (!NIL_P(fname)) {
+    	__android_log_print(ANDROID_LOG_INFO, "ruby_eval.c",
+    		"[%s:%d %s]%s", __FILE__, __LINE__, __FUNCTION__, RSTRING(fname)->ptr);
+    }
+#else
+    printf("====>eval.c:rb_require : %s\n", RSTRING(fname)->ptr);
+    fflush(stdout);
+#endif
+
+
+--------------------
+
 

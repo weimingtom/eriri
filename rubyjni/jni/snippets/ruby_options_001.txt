@@ -1,0 +1,77 @@
+
+//do_search
+	    else if (do_search) {
+		char *path = getenv("RUBYPATH");
+
+		script = 0;
+		if (path) {
+		    script = dln_find_file(argv[0], path);
+		}
+		if (!script) {
+		    script = dln_find_file(argv[0], getenv(PATH_ENV));
+		}
+		if (!script) script = argv[0];
+		script = ruby_sourcefile = rb_source_filename(script);
+		script_node = NEW_NEWLINE(0);
+	    }
+	    
+------------------------
+
+
+	char *ARGV[] = {"ruby.exe", "test_fib.rb", NULL};
+
+#ifdef _WIN32
+    NtInitialize(&argc, &argv);
+#endif
+
+	ruby_init();
+
+
+//ruby_options
+    int state;
+
+    Init_stack((void*)&state);
+    PUSH_TAG(PROT_NONE);
+    
+//ruby_process_options(argc, argv)
+	ruby_script("ruby.exe");
+    rb_argv0 = rb_progname;
+#if defined(USE_DLN_A_OUT)
+    dln_argv0 = argv[0];
+#endif
+    set_arg0space();
+    
+//proc_options(argc, argv)
+	
+    do_search = Qfalse;
+    
+    ...
+    
+    if (!e_script) {
+    script = argv[0];
+    
+#if defined DOSISH || defined __CYGWIN__
+	    translate_char(script, '\\', '/');
+#endif
+
+    ruby_script(script);
+    ruby_set_argv(0, argv);
+    /////??? process_sflag();
+    
+    ruby_init_loadpath();
+    ruby_sourcefile = rb_source_filename("ruby.exe");
+    
+    load_file(script, 1);
+    
+    //???? load_file()
+    
+    xflag = 0;
+    
+    //ruby_run()
+    if (ruby_nerrs > 0) exit(EXIT_FAILURE);
+    state = ruby_exec();
+    if (state && !ex) ex = state;
+    ruby_stop(ex);
+    
+    
+    

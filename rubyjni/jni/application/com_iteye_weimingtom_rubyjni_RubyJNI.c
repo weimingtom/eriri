@@ -5,8 +5,18 @@
 extern int main(int argc, char **argv, char **envp);
 
 JNIEXPORT jint JNICALL Java_com_iteye_weimingtom_rubyjni_RubyJNI_exec
-  (JNIEnv *env, jobject obj, jint x)
+  (JNIEnv *env, jobject obj, jstring filename)
 {
+    char bufFilename[256] = {0};
+    const char *strFilename;
+    strFilename = (*env)->GetStringUTFChars(env, filename, NULL);
+    if (strFilename == NULL) {
+        return -1; /* OutOfMemoryError already thrown */
+    }
+    //printf("%s", strFilename);
+    snprintf(bufFilename, sizeof(bufFilename) - 1, "%s", strFilename);
+    (*env)->ReleaseStringUTFChars(env, filename, strFilename);
+
 	ruby_debug = Qtrue;
 	//warning: method redefined; discarding old
 	ruby_verbose = Qtrue;
@@ -35,14 +45,28 @@ JNIEXPORT jint JNICALL Java_com_iteye_weimingtom_rubyjni_RubyJNI_exec
 
 	if (1)
 	{
+		ruby_debug = Qtrue;
+		//warning: method redefined; discarding old
+		ruby_verbose = Qtrue;
+
+		//see http://my.opera.com/subjam/blog/embedding-ruby-in-c-programs
+		//see http://aeditor.rubyforge.org/ruby_cplusplus/index.html
 		ruby_init();
-		ruby_init_loadpath();
-		//rb_load_file("fib.rb");
-		rb_load_file("test_fib.rb");
-		ruby_exec();
-		//ruby_run();
+		//rb_eval_string("puts 'hello world'");
+		//rb_eval_string("printf 'hello'");
 		//ruby_finalize();
+
+		//ruby_init();
+		//rb_eval_string("puts 'hello world'");
+		//rb_eval_string("printf 'hello'");
+		//ruby_finalize();
+		ruby_init_loadpath();
+		rb_load_file(bufFilename/*"test_fib.rb"*/);
+		//rb_exec_end_proc();
+		//state = ruby_exec();
+		//ruby_cleanup(state);
+		return ruby_cleanup(ruby_exec());
 	}
 	
-	return x + 1;
+	return -1;
 }

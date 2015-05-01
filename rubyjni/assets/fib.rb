@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+
 # calculate Fibonacci(20)
 # for benchmark
 def fib(n)
@@ -7,4 +9,4 @@ def fib(n)
     fib(n-2)+fib(n-1)
   end
 end
-print(fib(20), "\n");
+# print(fib(20), "\n");

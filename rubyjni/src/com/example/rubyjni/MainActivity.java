@@ -14,6 +14,6 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		this.setContentView(R.layout.main);
 		RubyJNI ruby = new RubyJNI(this);
-		Log.e(TAG, "mycall : " + ruby.exec(0));
+		Log.e(TAG, "ruby.exec return : " + ruby.exec("test_fib.rb"));
 	}
 }

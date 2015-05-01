@@ -10010,6 +10010,11 @@ rb_intern(name)
     ID id;
     int last;
 
+#if 1
+	//fprintf(stdout, "$%s$", name);
+	//fflush(stdout);
+#endif
+
     if (st_lookup(sym_tbl, (st_data_t)name, (st_data_t *)&id))
 	return id;
 

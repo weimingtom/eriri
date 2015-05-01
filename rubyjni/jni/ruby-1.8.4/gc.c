@@ -1831,6 +1831,10 @@ rb_gc_call_finalizer_at_exit()
     RVALUE *p, *pend;
     int i;
 
+#if RUBY_INIT_REENTRANT
+	//need_call_final = 1;
+#endif
+
     /* run finalizers */
     if (need_call_final) {
 	p = deferred_final_list;
@@ -1869,6 +1873,20 @@ rb_gc_call_finalizer_at_exit()
 	    p++;
 	}
     }
+#if RUBY_INIT_REENTRANT
+    freelist = 0;
+	deferred_final_list = 0;
+	heaps_length = 0;
+	heaps_used = 0;
+	heap_slots = HEAP_MIN_SLOTS;
+
+	malloc_increase = 0;
+	malloc_limit = GC_MALLOC_LIMIT;
+	garbage_collect();
+
+	need_call_final = 0;
+	finalizer_table = 0;
+#endif
 }
 
 /*
