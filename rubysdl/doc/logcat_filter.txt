@@ -1,0 +1,3 @@
+^(?!.*(nativeGetEnabledTags)).*$
+
+see http://stackoverflow.com/questions/13416142/unexpected-value-from-nativegetenabledtags-0

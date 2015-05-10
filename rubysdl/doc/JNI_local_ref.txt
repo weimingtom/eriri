@@ -1,0 +1,266 @@
+﻿http://blog.k-res.net/archives/1525.html
+
+Close
+HOME关于相册GPS
+[译]Android冰淇淋三明治ICS(4.0+)JNI局部引用的变化
+五月 14, 2013  |  Posted by K-Res  
+译序：
+这篇文章的内容实际是在我发现一个项目bug后寻找解决方案时找到的，当时项目原有target为8（ICS 4.0之前的2.X版本），在4.0+的S3上运行一切正常，而后target升级到14时再在S3上运行时就会出现类似如下的native crash：
+
+05-13 14:07:13.139: E/dalvikvm(22265): JNI ERROR (app bug): attempt to use stale local reference 0x20d00001
+05-13 14:07:13.139: E/dalvikvm(22265): VM aborting
+05-13 14:07:13.139: A/libc(22265): Fatal signal 11 (SIGSEGV) at 0xdeadd00d (code=1), thread 22457 (Thread-1276)
+05-13 14:07:13.239: I/DEBUG(1894): *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***
+05-13 14:07:13.249: I/DEBUG(1894): Build fingerprint: ‘samsung/m0zc/m0chn:4.1.2/JZO54K/I9300ZCEMB1:user/release-keys’
+05-13 14:07:13.249: I/DEBUG(1894): pid: 22265, tid: 22457, name: Thread-1276 >>> cn.android.app <<<
+05-13 14:07:13.249: I/DEBUG(1894): signal 11 (SIGSEGV), code 1 (SEGV_MAPERR), fault addr deadd00d
+05-13 14:07:13.489: I/DEBUG(1894): r0 00000000 r1 00000000 r2 deadd00d r3 00000000
+05-13 14:07:13.489: I/DEBUG(1894): r4 408cb1a8 r5 0000020c r6 20d00001 r7 fffff86c
+05-13 14:07:13.489: I/DEBUG(1894): r8 5ee308dc r9 00004e58 sl fffff870 fp 5ee307b8
+05-13 14:07:13.489: I/DEBUG(1894): ip 00004000 sp 5ee30540 lr 400f7c95 pc 40866e50 cpsr 60000030
+05-13 14:07:13.489: I/DEBUG(1894): d0 3ff000003f800000 d1 0000000000000000
+05-13 14:07:13.489: I/DEBUG(1894): d2 0000000000000000 d3 0000000000000000
+05-13 14:07:13.489: I/DEBUG(1894): d4 0000000000000000 d5 0000000000000000
+05-13 14:07:13.489: I/DEBUG(1894): d6 0000000000000000 d7 0000000000000000
+05-13 14:07:13.489: I/DEBUG(1894): d8 0000000000000000 d9 0000000000000000
+05-13 14:07:13.489: I/DEBUG(1894): d10 0000000000000000 d11 0000000000000000
+05-13 14:07:13.489: I/DEBUG(1894): d12 0000000000000000 d13 0000000000000000
+05-13 14:07:13.489: I/DEBUG(1894): d14 0000000000000000 d15 0000000000000000
+05-13 14:07:13.489: I/DEBUG(1894): d16 0000000000000000 d17 0000000000000000
+05-13 14:07:13.489: I/DEBUG(1894): d18 0000000000000000 d19 0000000000000000
+05-13 14:07:13.489: I/DEBUG(1894): d20 0000000000000000 d21 0000000000000000
+05-13 14:07:13.489: I/DEBUG(1894): d22 0000000000000000 d23 0000000000000000
+05-13 14:07:13.489: I/DEBUG(1894): d24 0000000000000000 d25 0000000000000000
+05-13 14:07:13.489: I/DEBUG(1894): d26 0000000000000000 d27 0000000000000000
+05-13 14:07:13.489: I/DEBUG(1894): d28 0000000000000000 d29 0000000000000000
+05-13 14:07:13.489: I/DEBUG(1894): d30 0000000000000000 d31 0000000000000000
+05-13 14:07:13.489: I/DEBUG(1894): scr 60000010
+05-13 14:07:13.499: I/DEBUG(1894): backtrace:
+05-13 14:07:13.499: I/DEBUG(1894): #00 pc 00045e50 /system/lib/libdvm.so (dvmAbort+75)
+05-13 14:07:13.499: I/DEBUG(1894): #01 pc 00028c3c /system/lib/libdvm.so (IndirectRefTable::get(void*) const+336)
+05-13 14:07:13.499: I/DEBUG(1894): #02 pc 00049eeb /system/lib/libdvm.so (dvmDecodeIndirectRef(Thread*, _jobject*)+30)
+05-13 14:07:13.499: I/DEBUG(1894): #03 pc 0004ca77 /system/lib/libdvm.so
+05-13 14:07:13.499: I/DEBUG(1894): #04 pc 00653480 /data/data/cn.android.app/lib/libgameapp.so (CKSoundManager::LoadBGM(char const*)+56)
+…
+05-13 14:07:13.509: I/DEBUG(1894): memory map around fault addr deadd00d:
+05-13 14:07:13.509: I/DEBUG(1894): be9ae000-be9cf000 [stack]
+05-13 14:07:13.509: I/DEBUG(1894): (no map for address)
+05-13 14:07:13.509: I/DEBUG(1894): ffff0000-ffff1000 [vectors]
+05-13 14:07:13.674: I/DEBUG(1894): !@dumpstate -k -t -z -d -o /data/log/dumpstate_app_native -m 22265
+
+
+上面crash内容中比较关键的提示是attempt to use stale local reference和调用栈上的dvmDecodeIndirectRef，实际指的是JNI调用时对Java部分对象引用的错误，按照关键内容找到了貌似是android dalvik team开发人员写的一篇相关的文章，按照解释顺利改正了不严谨的JNI使用代码，问题解决！感觉有必要翻译一下全文，加深一下理解（由于本人水平有限，翻译不当之处欢迎指出！）：
+
+正文：
+[本文作者是Elliott Hughes，Dalvik小组的软件工程师。- Tim Bray]
+
+如果你不写用到JNI的原生代码的话，那么这篇文章对你没什么用。如果你写的话，那么你真应该好好读读本文。
+
+什么东西变了？为嘛呢？
+每个开发者都想要一个好用垃圾回收器(garbage collector，简称GC)。做的好的GC是会随时移动对象(objects)的。这样就能便于提供更高效的内存分配和批量内存回收，避免堆内存碎片，并可能提高定位性能(locality)。如果你把指向这些对象的指针递交给原生代码的话，随时移动对象就是个问题了。JNI使用像jobject这样的类型来解决这个问题：不是直接递交指针，而是给你一个能够在必要时兑换为实际指针的透明句柄(opaque handle，概念上对开发人员透明)。通过使用句柄，当GC移动对象时，只需要更新句柄对应表使其指向对象的新位置就可以了。这就意味着原生代码不用在每次GC运行时被留下一堆不可用的指针了。
+
+在之前的Android版本中，我们并没有使用间接句柄；我们用的是直接指针。由于我们并没有实现会移动对象的GC所以这看起来没嘛大问题，可是这却会导致开发人员写出看似工作正常而实际是有bug的代码。在ICS中，即使我们依然没有实现一个会移动对象的GC，可我们已经转为使用间接引用了所以你们也会开始检查出你们原生代码中的bug了。
+
+ICS提供了一种JNI bug兼容模式：只要AndroidManifest.xml中的targetSdkVersion版本号是低于ICS的(14-)，你的代码就能得到“豁免”。可是一旦你更新了targetSdkVersion的话，你的代码就必须是正确的！
+
+CheckJNI已经被更新为会检测并报告这些错误，并且在ICS中，如果manifest中的debuggable=”true”的话CheckJNI默认就已经开启了。
+
+JNI引用的一些基础知识
+在JNI中，有一些不同的引用。其中最重要的两种就是局部引用(local references)和全局引用(global references)。任意一个给定的jobject都可以是局部或是全局的。(另外还有弱全局weak globals，但这种有一个单独的类型，jweak，在此并不涉及。)
+
+全局/局部的区别同时影响生命周期和作用域。全局的可以在任意线程通过本线程的JNIEnv*使用，并且可以有效到明确调用DeleteGlobalRef()之时。局部的只能在其最初被递交到的线程中使用，并且可以有效到明确调用DeleteLocalRef()之时，或者，更普遍的，到你从你的原生函数中返回为止。当原生函数返回时，所有的局部引用都会被自动删除掉。
+
+在之前的系统中，局部引用是直接的指针，局部引用永远不会真正变为不可用的。那就意味着你可以无限使用一个局部引用，即使你已经明确对它调用过DeleteLocalRef()了，或者使用PopLocalFrame()明确删除了它。
+
+虽然任意JNIEnv*只能在一个线程中可用，但由于Android在JNIEnv*中从来没有保存过每个线程的状态，所以之前在错误的线程中使用JNIEnv*也不会出问题。现在每个线程都有一个局部引用表，在正确的线程中使用JNIEnv*就是至关重要的了。
+
+以上讲的就是ICS会进行检测的bug。我会过一些常见的实例来具体说明这些问题，如果发现他们，并且如何进行修复。你确实需要修复这些问题，这是很重要的，因为很有可能未来版本的Android就会加入能移动对象的回收器。我们也不可能一直提供bug兼容模式。
+
+常见JNI引用bug
+Bug:在原生代码接口类中长期保存jobject时忘记调用NewGlobalRef()
+
+如果你用了原生接口类(native peer)(一个长期存在的对应Java对象的原生对象，通常在Java对象创建时创建，在Java对象的finalizer运行时销毁)，一定不能在原生对象中长期保存jobject，因为下次你再使用它的时候它就已经不再可用了。(JNIEnv*也有类似的情况。在同一线程内发生的原生调用时它可能还是可用的，否则就不可用了。)
+
+1
+ class MyPeer {
+2
+ public:
+3
+   MyPeer(jstring s) {
+4
+     str_ = s; // 错误: 没有确定是全局就长期保存引用
+5
+   }
+6
+   jstring str_;
+7
+ };
+8
+ 
+9
+ static jlong MyClass_newPeer(JNIEnv* env, jclass) {
+10
+   jstring local_ref = env-&gt;NewStringUTF("hello, world!");
+11
+   MyPeer* peer = new MyPeer(local_ref);
+12
+   return static_cast&lt;jlong&gt;(reinterpret_cast&lt;uintptr_t&gt;(peer));
+13
+   // 错误: local_ref 在我们返回时将变得不再可用, 但我们已经将其保存在'peer'中了.
+14
+ }
+15
+ 
+16
+ static void MyClass_printString(JNIEnv* env, jclass, jlong peerAddress) {
+17
+   MyPeer* peer = reinterpret_cast&lt;MyPeer*&gt;(static_cast&lt;uintptr_t&gt;(peerAddress));
+18
+   // 错误: peer-&gt;str_ is 不可用!
+19
+   ScopedUtfChars s(env, peer-&gt;str_);
+20
+   std::cout &lt;&lt; s.c_str() &lt;&lt; std::endl;
+21
+ }
+这个问题的解决方法是只保存JNI全局引用。由于JNI全局引用永远不会被自动释放，所以很重要的一点就是你得自己自己释放他们。这个问题会由于你的析构函数里没有JNIEnv*而变得稍微有点囧。最简单的解决方法通常就是在你的原生接口类中加入一个明确的销毁函数，并在Java接口类的析构(finalizer)中调用。
+
+1
+ class MyPeer {
+2
+ public:
+3
+   MyPeer(JNIEnv* env, jstring s) {
+4
+     this-&gt;s = env-&gt;NewGlobalRef(s);
+5
+   }
+6
+   ~MyPeer() {
+7
+     assert(s == NULL);
+8
+   }
+9
+   void destroy(JNIEnv* env) {
+10
+     env-&gt;DeleteGlobalRef(s);
+11
+     s = NULL;
+12
+   }
+13
+   jstring s;
+14
+ };
+你应该总是保持NewGlobalRef()/DeleteGlobalRef()成对调用。CheckJNI会捕获到全局引用的泄漏，不过上限很高(默认2000)，所以要小心。
+
+如果你的代码里确实有这类错误的话，会收到类似这样的崩溃信息：
+
+     JNI ERROR (app bug): accessed stale local reference 0x5900021 (index 8 in a table of size 8)
+    JNI WARNING: jstring is an invalid local reference (0x5900021)
+                 in LMyClass;.printString:(J)V (GetStringUTFChars)
+    "main" prio=5 tid=1 RUNNABLE
+      | group="main" sCount=0 dsCount=0 obj=0xf5e96410 self=0x8215888
+      | sysTid=11044 nice=0 sched=0/0 cgrp=[n/a] handle=-152574256
+      | schedstat=( 156038824 600810 47 ) utm=14 stm=2 core=0
+      at MyClass.printString(Native Method)
+      at MyClass.main(MyClass.java:13)
+如果你使用了另一个线程的JNIEnv*，会收到类似这样的崩溃信息：
+
+  JNI WARNING: threadid=8 using env from threadid=1
+                 in LMyClass;.printString:(J)V (GetStringUTFChars)
+    "Thread-10" prio=5 tid=8 NATIVE
+      | group="main" sCount=0 dsCount=0 obj=0xf5f77d60 self=0x9f8f248
+      | sysTid=22299 nice=0 sched=0/0 cgrp=[n/a] handle=-256476304
+      | schedstat=( 153358572 709218 48 ) utm=12 stm=4 core=8
+      at MyClass.printString(Native Method)
+      at MyClass$1.run(MyClass.java:15)
+Bug:错误的认为FindClass()返回全局引用
+
+FindClass()返回的是局部引用。许多人认为是全局的。在像Android这样不具备类卸载(class unloading)的系统中，你可以把jfieldID和jmethodID当作全局处理。(他们实际上不是引用，但在支持类卸载的系统中也存在类似的生存周期问题。)但是jclass是引用，而且FindClass()返回的是局部引用。一种常见的错误就是“静态jclass”。除非你手动将局部引用转换为全局引用，否则你的代码就会有问题。下面是正确代码的写法：
+
+1
+ static jclass gMyClass;
+2
+ static jclass gSomeClass;
+3
+ 
+4
+ static void MyClass_nativeInit(JNIEnv* env, jclass myClass) {
+5
+   // ‘myClass’ (和其他非主要参数) 仅仅是局部引用.
+6
+   gMyClass = env-&gt;NewGlobalRef(myClass);
+7
+ 
+8
+   // FindClass仅返回局部引用.
+9
+   jclass someClass = env-&gt;FindClass("SomeClass");
+10
+   if (someClass == NULL) {
+11
+     return; // FindClass 已经抛出了 NoClassDefFoundError 的异常.
+12
+   }
+13
+   gSomeClass = env-&gt;NewGlobalRef(someClass);
+14
+ }
+如果你的代码确实有这类错误的话，会收到类似这样的崩溃信息：
+
+     JNI ERROR (app bug): attempt to use stale local reference 0x4200001d (should be 0x4210001d)
+    JNI WARNING: 0x4200001d is not a valid JNI reference
+                 in LMyClass;.useStashedClass:()V (IsSameObject)
+Bug:调用DeleteLocalRef()后继续使用已被删除的引用
+
+我想这事不用说也应该知道，调用DeleteLocalRef()删除引用后再使用会出现非法访问，但是因为这以前是可以正常工作的，所以你也许已经犯了这个错误但还没意识到。常见的模式像是这样：原生代码部分有一个长期运行的循环，开发人员为了要避免达到局部引用上限而尝试清理每一个局部引用，但可能会意外地将想要作为返回值的引用也给删除掉！
+
+解决方法很简单：别对你还要用到的(包括作为返回值的)引用调用DeleteLocalRef()。
+
+Bug:调用PopLocalFrame()后继续使用已被弹出的引用
+
+这其实是上面那个bug的微妙变种。PushLocalFrame()和PopLocalFrame()调用能批量删除局部引用。当调用PopLocalFrame()时，你将frame上的一个想要保留的引用传入为参数(通常是要用作返回值),或者NULL。过去，你会发现像这样的错误代码不会有任何问题：
+
+1
+ static jobjectArray MyClass_returnArray(JNIEnv* env, jclass) {
+2
+   env-&gt;PushLocalFrame(256);
+3
+   jobjectArray array = env-&gt;NewObjectArray(128, gMyClass, NULL);
+4
+   for (int i = 0; i &lt; 128; ++i) {
+5
+       env-&gt;SetObjectArrayElement(array, i, newMyClass(i));
+6
+   }
+7
+   env-&gt;PopLocalFrame(NULL); // 错误: 应当传递 'array'.
+8
+   return array; // 错误: 数组已经不可用.
+9
+ }
+解决方法通常是将引用传递给PopLocalFrame()。注意在上面的例子中，你不用保存单独数组元素的引用；只要GC知道数组本身，它就会处理元素(并且包含他们指向的任意对象)本身。
+
+如果你的代码确实有这类错误的话，会收到类似这样的崩溃信息：
+
+   JNI ERROR (app bug): accessed stale local reference 0x2d00025 (index 9 in a table of size 8)
+    JNI WARNING: invalid reference returned from native code
+                 in LMyClass;.returnArray:()[Ljava/lang/Object;
+总结
+是的，我们要求你在JNI编码时要更注意一些细节，这是额外的工作。但是我们认为随着我们做出更好更佳的内存管理代码你们也能走在更前面。
+
+原文（有墙！）：
+JNI Local Reference Changes in ICS -http://android-developers.blogspot.com/2011/11/jni-local-reference-changes-in-ics.html
+
+相关文章
+Android真机执行ndk-gdb后出现”found running pid:0 could not extract pid of application…”的解决方法2011年09月17日 Android真机执行ndk-gdb后出现”found running pid:0 could not extract pid of application…”的解决方法 (0)
+使用distcc分布式编译加速Android NDK原生项目编译生成2013年03月14日 使用distcc分布式编译加速Android NDK原生项目编译生成 (0)
+对于Android NDK编译器ARM和Thumb模式的理解及Toolchain的切换clang编译器2013年03月13日 对于Android NDK编译器ARM和Thumb模式的理解及Toolchain的切换clang编译器 (1)
+cocos2d-x创建android项目后NDK编译警告被当作错误的处理方法2013年04月24日 cocos2d-x创建android项目后NDK编译警告被当作错误的处理方法 (0)
+NDK r6编译一直提示WARNING: Rebuilding STLport libraries from sources! 的不确定解决方法2011年09月17日 NDK r6编译一直提示WARNING: Rebuilding STLport libraries from sources! 的不确定解决方法 (0)
+Zemanta
+Category Categories: C/C++, JAVA, 移动设备, 设计开发   |  Tag Tags: android, ICS, JNI, local, ndk, reference  |  Comments 暂无评论
+最新最早最热
+评论1条新浪微博

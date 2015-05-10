@@ -1,0 +1,48 @@
+﻿JNI ERROR (app bug): attempt to use stale local reference
+
+================
+reson:
+
+CallJavaSwapBuffers jni\sdl\src\video\android\SDL_androidvideo.c, 
+called by CreateScreen & main in application/graywin.c
+called by DemoRenderer_nativeInit sdl/sdl_main.c
+
+	static inline int CallJavaSwapBuffers()
+	{
+		__android_log_print(ANDROID_LOG_ERROR, "SDL_androidvideo", "CallJavaSwapBuffers 01");
+		// <-- crash here (CallIntMethod)
+		int ret = (*JavaEnv)->CallIntMethod( JavaEnv, JavaRenderer, JavaSwapBuffers );
+		__android_log_print(ANDROID_LOG_ERROR, "SDL_androidvideo", "CallJavaSwapBuffers 02");
+		return ret;
+	}
+
+
+JavaRendererClass and JavaSwapBuffers may be an old value :
+
+	JNIEXPORT void JNICALL 
+	JAVA_EXPORT_NAME(DemoRenderer_nativeInitJavaCallbacks) ( JNIEnv*  env, jobject thiz )
+	{
+		JavaEnv = env;
+		JavaRenderer = thiz;
+		
+		JavaRendererClass = (*JavaEnv)->GetObjectClass(JavaEnv, thiz);
+		JavaSwapBuffers = (*JavaEnv)->GetMethodID(JavaEnv, JavaRendererClass, "swapBuffers", "()I");
+		
+		ANDROID_InitOSKeymap();
+		
+	}
+
+=======================
+
+solution:
+call DemoRenderer_nativeInitJavaCallbacks in DemoRenderer_nativeInit
+
+extern C_LINKAGE void
+JAVA_EXPORT_NAME(DemoRenderer_nativeInit) ( JNIEnv*  env, jobject thiz, jstring currentDirectoryPath_j, jboolean oo, jboolean dr )
+{
+	int argc = 1;
+	char *argv[4] = { "sdl", NULL, NULL, NULL };
+	__android_log_print(ANDROID_LOG_ERROR, "sdl_main", "nativeInit 1");
+    JAVA_EXPORT_NAME(DemoRenderer_nativeInitJavaCallbacks)(env, thiz);
+    ...
+    

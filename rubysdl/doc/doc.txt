@@ -1,0 +1,5 @@
+﻿net.sourceforge.clonekeenplus
+https://github.com/pelya/commandergenius/blob/sdl_android/project/java/GLSurfaceView_SDL.java
+
+onscripter_android.tar.gz
+http://onscripter.sourceforge.jp/android/android.html
