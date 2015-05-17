@@ -1,6 +1,7 @@
 ﻿调用打印：eval.c => rb_call()
 常量打印：parse.c => rb_intern()
 require打印（如果加载过，以后不会实际读取内容）：eval.c => rb_require_safe()
+VC6调试RSTRING(mesg)->ptr: ((RString *)mesg)->ptr
 ----------------
 eval.c:
 

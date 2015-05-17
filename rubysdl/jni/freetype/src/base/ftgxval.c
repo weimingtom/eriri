@@ -28,7 +28,13 @@
 #include <ft2build.h>
 #include FT_INTERNAL_OBJECTS_H
 #include FT_SERVICE_GX_VALIDATE_H
-
+/*
+#if !defined(_MSC_VER) || _MSC_VER_ > 1200 //VC 6
+#else
+#include <freetype/internal/ftobjs.h>
+#include <freetype/internal/services/svgxval.h>
+#endif
+*/
 
   /* documentation is in ftgxval.h */
 

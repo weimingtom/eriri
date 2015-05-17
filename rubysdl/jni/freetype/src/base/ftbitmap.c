@@ -20,7 +20,14 @@
 #include FT_BITMAP_H
 #include FT_IMAGE_H
 #include FT_INTERNAL_OBJECTS_H
-
+/*
+#if !defined(_MSC_VER) || _MSC_VER > 1200 //VC 6
+#else
+#include <freetype/ftbitmap.h>
+#include <freetype/ftimage.h>
+#include <freetype/internal/ftobjs.h>
+#endif
+*/
 
   static
   const FT_Bitmap  null_bitmap = { 0, 0, 0, 0, 0, 0, 0, 0 };

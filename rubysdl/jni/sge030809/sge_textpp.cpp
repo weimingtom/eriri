@@ -374,7 +374,8 @@ void sge_TextEditor::change_textf(const char *text, ...)
 	va_list ap;
 	
 	#if defined(__WIN32__) && !defined(__MINGW32__)
-	va_start((va_list*)ap, text); //Stupid win32 crosscompiler
+	//va_start((va_list*)ap, text); //Stupid win32 crosscompiler
+	va_start(ap, text);
 	#else
 	va_start(ap, text);
 	#endif

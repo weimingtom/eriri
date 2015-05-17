@@ -28,7 +28,8 @@
 #ifndef HAVE_LIBC
 /* These are some C runtime intrinsics that need to be defined */
 
-#if defined(_MSC_VER)
+#if defined(_MSC_VER) && _MSC_VER > 1200
+/*VC6 link error?*/
 
 #ifndef __FLTUSED__
 #define __FLTUSED__

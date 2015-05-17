@@ -24,6 +24,7 @@
 #include <math.h>
 #include <string.h>
 #include <stdarg.h>
+#include <stdio.h>
 #include "sge_surface.h"
 
 
@@ -145,7 +146,8 @@ void sge_SetError(const char *format, ...)
 	va_list ap;
 	
 	#if defined(__WIN32__) && !defined(__MINGW32__)
-	va_start((va_list*)ap, format); //Stupid w32 crosscompiler
+	//va_start((va_list *)ap, format); //Stupid w32 crosscompiler
+	va_start(ap, format); //Stupid w32 crosscompiler
 	#else
 	va_start(ap, format);
 	#endif

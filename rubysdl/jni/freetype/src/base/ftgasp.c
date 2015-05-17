@@ -19,7 +19,13 @@
 #include <ft2build.h>
 #include FT_GASP_H
 #include FT_INTERNAL_TRUETYPE_TYPES_H
-
+/*
+#if !defined(_MSC_VER) || _MSC_VER > 1200 //VC 6
+#else
+#include <freetype/ftgasp.h>
+#include <freetype/internal/tttypes.h>
+#endif
+*/
 
   FT_EXPORT_DEF( FT_Int )
   FT_Get_Gasp( FT_Face  face,

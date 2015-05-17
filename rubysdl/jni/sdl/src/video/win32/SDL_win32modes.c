@@ -138,7 +138,11 @@ WIN_AddDisplay(LPTSTR DeviceName)
 #ifdef DEBUG_MODES
     printf("Display: %s\n", WIN_StringToUTF8(DeviceName));
 #endif
+#if _MSC_VER == 1200
+    if (!WIN_GetDisplayMode(NULL, ENUM_CURRENT_SETTINGS, &mode)) {
+#else
     if (!WIN_GetDisplayMode(DeviceName, ENUM_CURRENT_SETTINGS, &mode)) {
+#endif
         return SDL_FALSE;
     }
 
@@ -163,10 +167,12 @@ WIN_InitModes(_THIS)
     DWORD i, j, count;
     DISPLAY_DEVICE device;
 
-    device.cb = sizeof(device);
+#if _MSC_VER == 1200
+	WIN_AddDisplay("\\\\.\\DISPLAY1");
+#else
+	device.cb = sizeof(device);
     for (i = 0;; ++i) {
-        TCHAR DeviceName[32];
-
+        TCHAR DeviceName[32] = {0};
         if (!EnumDisplayDevices(NULL, i, &device, 0)) {
             break;
         }
@@ -191,6 +197,7 @@ WIN_InitModes(_THIS)
             WIN_AddDisplay(DeviceName);
         }
     }
+#endif
     if (_this->num_displays == 0) {
         SDL_SetError("No displays available");
         return -1;

@@ -42,6 +42,15 @@
 #include FT_INTERNAL_OBJECTS_H
 #include FT_INTERNAL_DEBUG_H
 #include FT_MODULE_H
+/*
+#if !defined(_MSC_VER) || _MSC_VER_ > 1200 //VC 6
+#else
+#include <freetype/config/ftconfig.h>
+#include <freetype/internal/ftobjs.h>
+#include <freetype/internal/ftdebug.h>
+#include <freetype/ftmodapi.h>
+#endif
+*/
 #include "basepic.h"
 
 

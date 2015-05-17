@@ -33,6 +33,15 @@
 #include FT_OUTLINE_H
 #include FT_BITMAP_H
 #include FT_INTERNAL_OBJECTS_H
+/*
+#if !defined(_MSC_VER) || _MSC_VER_ > 1200 //VC 6
+#else
+#include <freetype/ftglyph.h>
+#include <freetype/ftoutln.h>
+#include <freetype/ftbitmap.h>
+#include <freetype/internal/ftobjs.h>
+#endif
+*/
 
 #include "basepic.h"
 

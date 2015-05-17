@@ -1,24 +1,24 @@
-# Microsoft Developer Studio Project File - Name="ruby184" - Package Owner=<4>
+# Microsoft Developer Studio Project File - Name="ruby" - Package Owner=<4>
 # Microsoft Developer Studio Generated Build File, Format Version 6.00
 # ** DO NOT EDIT **
 
-# TARGTYPE "Win32 (x86) Console Application" 0x0103
+# TARGTYPE "Win32 (x86) Static Library" 0x0104
 
-CFG=ruby184 - Win32 Debug
+CFG=ruby - Win32 Debug
 !MESSAGE This is not a valid makefile. To build this project using NMAKE,
 !MESSAGE use the Export Makefile command and run
 !MESSAGE 
-!MESSAGE NMAKE /f "ruby184.mak".
+!MESSAGE NMAKE /f "ruby.mak".
 !MESSAGE 
 !MESSAGE You can specify a configuration when running NMAKE
 !MESSAGE by defining the macro CFG on the command line. For example:
 !MESSAGE 
-!MESSAGE NMAKE /f "ruby184.mak" CFG="ruby184 - Win32 Debug"
+!MESSAGE NMAKE /f "ruby.mak" CFG="ruby - Win32 Debug"
 !MESSAGE 
 !MESSAGE Possible choices for configuration are:
 !MESSAGE 
-!MESSAGE "ruby184 - Win32 Release" (based on "Win32 (x86) Console Application")
-!MESSAGE "ruby184 - Win32 Debug" (based on "Win32 (x86) Console Application")
+!MESSAGE "ruby - Win32 Release" (based on "Win32 (x86) Static Library")
+!MESSAGE "ruby - Win32 Debug" (based on "Win32 (x86) Static Library")
 !MESSAGE 
 
 # Begin Project
@@ -28,7 +28,7 @@ CFG=ruby184 - Win32 Debug
 CPP=cl.exe
 RSC=rc.exe
 
-!IF  "$(CFG)" == "ruby184 - Win32 Release"
+!IF  "$(CFG)" == "ruby - Win32 Release"
 
 # PROP BASE Use_MFC 0
 # PROP BASE Use_Debug_Libraries 0
@@ -40,18 +40,19 @@ RSC=rc.exe
 # PROP Output_Dir "Release"
 # PROP Intermediate_Dir "Release"
 # PROP Target_Dir ""
-# ADD BASE CPP /nologo /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_CONSOLE" /D "_MBCS" /YX /FD /c
-# ADD CPP /nologo /W3 /GX /O2 /I "." /D "WIN32" /D "NDEBUG" /D "_CONSOLE" /D "_MBCS" /YX /FD /c
+# ADD BASE CPP /nologo /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_MBCS" /D "_LIB" /YX /FD /c
+# ADD CPP /nologo /MT /W3 /GX /O2 /I "." /D "WIN32" /D "NDEBUG" /D "_MBCS" /D "_LIB" /FD /c
+# SUBTRACT CPP /YX
 # ADD BASE RSC /l 0x804 /d "NDEBUG"
 # ADD RSC /l 0x804 /d "NDEBUG"
 BSC32=bscmake.exe
 # ADD BASE BSC32 /nologo
 # ADD BSC32 /nologo
-LINK32=link.exe
-# ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:console /machine:I386
-# ADD LINK32 oldnames.lib user32.lib advapi32.lib wsock32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:console /machine:I386
+LIB32=link.exe -lib
+# ADD BASE LIB32 /nologo
+# ADD LIB32 /nologo
 
-!ELSEIF  "$(CFG)" == "ruby184 - Win32 Debug"
+!ELSEIF  "$(CFG)" == "ruby - Win32 Debug"
 
 # PROP BASE Use_MFC 0
 # PROP BASE Use_Debug_Libraries 1
@@ -62,32 +63,49 @@ LINK32=link.exe
 # PROP Use_Debug_Libraries 1
 # PROP Output_Dir "Debug"
 # PROP Intermediate_Dir "Debug"
-# PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
-# ADD BASE CPP /nologo /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /YX /FD /GZ /c
-# ADD CPP /nologo /MTd /W3 /Gm /GX /ZI /Od /I "." /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /FR /YX /FD /GZ /c
+# ADD BASE CPP /nologo /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_MBCS" /D "_LIB" /YX /FD /GZ /c
+# ADD CPP /nologo /MTd /W3 /Gm /GX /ZI /Od /I "." /D "WIN32" /D "_DEBUG" /D "_MBCS" /D "_LIB" /FD /GZ /c
+# SUBTRACT CPP /YX
 # ADD BASE RSC /l 0x804 /d "_DEBUG"
 # ADD RSC /l 0x804 /d "_DEBUG"
 BSC32=bscmake.exe
 # ADD BASE BSC32 /nologo
 # ADD BSC32 /nologo
-LINK32=link.exe
-# ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:console /debug /machine:I386 /pdbtype:sept
-# ADD LINK32 oldnames.lib user32.lib advapi32.lib wsock32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:console /debug /machine:I386 /pdbtype:sept
+LIB32=link.exe -lib
+# ADD BASE LIB32 /nologo
+# ADD LIB32 /nologo
 
 !ENDIF 
 
 # Begin Target
 
-# Name "ruby184 - Win32 Release"
-# Name "ruby184 - Win32 Debug"
-# Begin Group "Source Files"
+# Name "ruby - Win32 Release"
+# Name "ruby - Win32 Debug"
+# Begin Group "win32"
 
-# PROP Default_Filter "cpp;c;cxx;rc;def;r;odl;idl;hpj;bat"
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\win32\win32.c
+# End Source File
+# End Group
+# Begin Group "missing"
+
+# PROP Default_Filter ""
 # Begin Source File
 
 SOURCE=.\missing\acosh.c
 # End Source File
+# Begin Source File
+
+SOURCE=.\missing\crypt.c
+# End Source File
+# Begin Source File
+
+SOURCE=.\missing\erf.c
+# End Source File
+# End Group
 # Begin Source File
 
 SOURCE=.\array.c
@@ -106,7 +124,11 @@ SOURCE=.\compar.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\missing\crypt.c
+SOURCE=.\config.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\defines.h
 # End Source File
 # Begin Source File
 
@@ -118,6 +140,15 @@ SOURCE=.\dln.c
 # End Source File
 # Begin Source File
 
+SOURCE=.\dln.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\dmydln.c
+# PROP Exclude_From_Build 1
+# End Source File
+# Begin Source File
+
 SOURCE=.\dmyext.c
 # End Source File
 # Begin Source File
@@ -126,7 +157,7 @@ SOURCE=.\enum.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\missing\erf.c
+SOURCE=.\env.h
 # End Source File
 # Begin Source File
 
@@ -154,11 +185,21 @@ SOURCE=.\inits.c
 # End Source File
 # Begin Source File
 
+SOURCE=.\intern.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\io.c
 # End Source File
 # Begin Source File
 
+SOURCE=.\lex.c
+# PROP Exclude_From_Build 1
+# End Source File
+# Begin Source File
+
 SOURCE=.\main.c
+# PROP Exclude_From_Build 1
 # End Source File
 # Begin Source File
 
@@ -167,6 +208,14 @@ SOURCE=.\marshal.c
 # Begin Source File
 
 SOURCE=.\math.c
+# End Source File
+# Begin Source File
+
+SOURCE=.\missing.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\node.h
 # End Source File
 # Begin Source File
 
@@ -206,11 +255,31 @@ SOURCE=.\re.c
 # End Source File
 # Begin Source File
 
+SOURCE=.\re.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\regex.c
 # End Source File
 # Begin Source File
 
+SOURCE=.\regex.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\ruby.c
+# End Source File
+# Begin Source File
+
+SOURCE=.\ruby.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\rubyio.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\rubysig.h
 # End Source File
 # Begin Source File
 
@@ -223,6 +292,10 @@ SOURCE=.\sprintf.c
 # Begin Source File
 
 SOURCE=.\st.c
+# End Source File
+# Begin Source File
+
+SOURCE=.\st.h
 # End Source File
 # Begin Source File
 
@@ -242,6 +315,10 @@ SOURCE=.\util.c
 # End Source File
 # Begin Source File
 
+SOURCE=.\util.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\variable.c
 # End Source File
 # Begin Source File
@@ -250,76 +327,7 @@ SOURCE=.\version.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\win32\win32.c
-# End Source File
-# End Group
-# Begin Group "Header Files"
-
-# PROP Default_Filter "h;hpp;hxx;hm;inl"
-# Begin Source File
-
-SOURCE=.\config.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\defines.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\dln.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\env.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\intern.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\missing.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\node.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\re.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\regex.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\ruby.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\rubyio.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\rubysig.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\st.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\util.h
-# End Source File
-# Begin Source File
-
 SOURCE=.\version.h
 # End Source File
-# End Group
-# Begin Group "Resource Files"
-
-# PROP Default_Filter "ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe"
-# End Group
 # End Target
 # End Project

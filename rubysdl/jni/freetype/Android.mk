@@ -21,9 +21,43 @@ LOCAL_CFLAGS := $(LOCAL_C_INCLUDES:%=-I%) \
 #Change C++ file extension as appropriate
 LOCAL_CPP_EXTENSION := .cpp
 
-LOCAL_SRC_FILES := $(foreach F, $(APP_SUBDIRS), $(addprefix $(F)/,$(notdir $(wildcard $(LOCAL_PATH)/$(F)/*.cpp))))
+#LOCAL_SRC_FILES := $(foreach F, $(APP_SUBDIRS), $(addprefix $(F)/,$(notdir $(wildcard $(LOCAL_PATH)/$(F)/*.cpp))))
 # Uncomment to also add C sources
-LOCAL_SRC_FILES += $(foreach F, $(APP_SUBDIRS), $(addprefix $(F)/,$(notdir $(wildcard $(LOCAL_PATH)/$(F)/*.c))))
+#LOCAL_SRC_FILES += $(foreach F, $(APP_SUBDIRS), $(addprefix $(F)/,$(notdir $(wildcard $(LOCAL_PATH)/$(F)/*.c))))
+LOCAL_SRC_FILES := 
+LOCAL_SRC_FILES += src/autofit/autofit.c
+LOCAL_SRC_FILES += src/base/ftbase.c
+LOCAL_SRC_FILES += src/bdf/bdf.c
+LOCAL_SRC_FILES += src/cache/ftcache.c
+LOCAL_SRC_FILES += src/cff/cff.c
+LOCAL_SRC_FILES += src/cid/type1cid.c
+LOCAL_SRC_FILES += src/gxvalid/gxvalid.c
+LOCAL_SRC_FILES += src/gzip/ftgzip.c
+LOCAL_SRC_FILES += src/lzw/ftlzw.c src/lzw/ftzopen.c
+LOCAL_SRC_FILES += src/otvalid/otvalid.c
+LOCAL_SRC_FILES += src/pcf/pcf.c
+LOCAL_SRC_FILES += src/pfr/pfr.c
+LOCAL_SRC_FILES += src/psaux/psaux.c
+LOCAL_SRC_FILES += src/pshinter/pshinter.c
+LOCAL_SRC_FILES += src/psnames/psnames.c
+LOCAL_SRC_FILES += src/raster/raster.c
+LOCAL_SRC_FILES += src/sfnt/sfnt.c
+LOCAL_SRC_FILES += src/smooth/smooth.c
+#LOCAL_SRC_FILES += src/tools
+LOCAL_SRC_FILES += src/truetype/truetype.c
+LOCAL_SRC_FILES += src/type1/type1.c
+LOCAL_SRC_FILES += src/type42/type42.c
+LOCAL_SRC_FILES += src/winfonts/winfnt.c
+
+LOCAL_SRC_FILES += src/base/ftsystem.c src/base/ftdebug.c src/base/ftinit.c
+LOCAL_SRC_FILES += src/base/ftbase.c src/base/ftbbox.c src/base/ftbdf.c
+LOCAL_SRC_FILES += src/base/ftbitmap.c src/base/ftcid.c src/base/ftfstype.c
+LOCAL_SRC_FILES += src/base/ftgasp.c src/base/ftglyph.c src/base/ftgxval.c
+LOCAL_SRC_FILES += src/base/ftlcdfil.c src/base/ftmm.c src/base/ftotval.c
+LOCAL_SRC_FILES += src/base/ftpatent.c src/base/ftpfr.c src/base/ftstroke.c
+LOCAL_SRC_FILES += src/base/ftsynth.c src/base/fttype1.c src/base/ftwinfnt.c
+LOCAL_SRC_FILES += src/base/ftxf86.c 
+
 
 LOCAL_SHARED_LIBRARIES := 
 

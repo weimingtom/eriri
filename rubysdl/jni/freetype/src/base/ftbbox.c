@@ -30,7 +30,14 @@
 #include FT_OUTLINE_H
 #include FT_INTERNAL_CALC_H
 #include FT_INTERNAL_OBJECTS_H
-
+/*
+#if !defined(_MSC_VER) || _MSC_VER_ > 1200 //VC 6
+#include <freetype/ftbbox.h>
+#include <freetype/ftimage.h>
+#include <freetype/ftoutln.h>
+#include <freetype/internal/ftcalc.h>
+#endif
+*/
 
   typedef struct  TBBox_Rec_
   {
@@ -560,6 +567,8 @@
     return 0;
   }
 
+
+#if !defined(_MSC_VER) || _MSC_VER_ > 1200 //VC 6
 FT_DEFINE_OUTLINE_FUNCS(bbox_interface,
     (FT_Outline_MoveTo_Func) BBox_Move_To,
     (FT_Outline_LineTo_Func) BBox_Move_To,
@@ -567,6 +576,16 @@ FT_DEFINE_OUTLINE_FUNCS(bbox_interface,
     (FT_Outline_CubicTo_Func)BBox_Cubic_To,
     0, 0
   )
+#else
+static const FT_Outline_Funcs  bbox_interface =
+{
+	(FT_Outline_MoveTo_Func) BBox_Move_To,
+	(FT_Outline_LineTo_Func) BBox_Move_To,
+	(FT_Outline_ConicTo_Func)BBox_Conic_To,
+	(FT_Outline_CubicTo_Func)BBox_Cubic_To,
+	0, 0
+};
+#endif
 
   /* documentation is in ftbbox.h */
 

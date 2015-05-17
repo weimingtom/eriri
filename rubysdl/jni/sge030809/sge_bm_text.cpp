@@ -265,7 +265,8 @@ SDL_Rect sge_BF_textoutf(SDL_Surface *surface, sge_bmpFont *font, Sint16 x, Sint
 	va_list ap;
 	
 	#if defined(__WIN32__) && !defined(__MINGW32__)
-	va_start((va_list*)ap, format); //Stupid w32 crosscompiler
+	//va_start((va_list *)ap, format); //Stupid w32 crosscompiler
+	va_start(ap, format);
 	#else
 	va_start(ap, format);
 	#endif

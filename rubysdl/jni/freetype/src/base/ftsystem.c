@@ -32,7 +32,17 @@
 #include FT_SYSTEM_H
 #include FT_ERRORS_H
 #include FT_TYPES_H
-
+/*
+#if !defined(_MSC_VER) || _MSC_VER_ > 1200 //VC 6
+#else
+#include <freetype/config/ftconfig.h>
+#include <freetype/internal/ftdebug.h>
+#include <freetype/internal/ftstream.h>
+#include <freetype/ftsystem.h>
+#include <freetype/fterrors.h>
+#include <freetype/fttypes.h>
+#endif
+*/
 
   /*************************************************************************/
   /*                                                                       */

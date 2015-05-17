@@ -144,7 +144,8 @@ typedef unsigned int uintptr_t;
 
 /* Enable various audio drivers */
 #ifndef _WIN32_WCE
-#define SDL_AUDIO_DRIVER_DSOUND	1
+/*FIXME:*/
+/*#define SDL_AUDIO_DRIVER_DSOUND	1*/
 #endif
 #define SDL_AUDIO_DRIVER_WINWAVEOUT	1
 #define SDL_AUDIO_DRIVER_DISK	1
@@ -155,9 +156,13 @@ typedef unsigned int uintptr_t;
 #define SDL_JOYSTICK_DISABLED	1
 #define SDL_HAPTIC_DUMMY	1
 #else
-#define SDL_JOYSTICK_DINPUT	1
+/*#define SDL_JOYSTICK_DINPUT	1*/
 #define SDL_HAPTIC_DINPUT	1
 #endif
+
+/*FIXME:*/
+#define SDL_HAPTIC_DISABLED 1
+#define SDL_JOYSTICK_WINMM 1
 
 /* Enable various shared object loading systems */
 #define SDL_LOADSO_WIN32	1
@@ -176,7 +181,7 @@ typedef unsigned int uintptr_t;
 #define SDL_VIDEO_DRIVER_DUMMY	1
 #define SDL_VIDEO_DRIVER_WIN32	1
 
-#define SDL_VIDEO_RENDER_D3D	1
+/*#define SDL_VIDEO_RENDER_D3D	1*/
 #define SDL_VIDEO_RENDER_GDI	1
 
 /* Enable OpenGL support */

@@ -6,7 +6,10 @@
 #include <string.h>
 #include <time.h>
 
-#include "SDL.h"
+#include <SDL.h>
+#ifdef _MSC_VER
+#include <windows.h>
+#endif
 
 #ifdef TEST_VGA16 /* Define this if you want to test VGA 16-color video modes */
 #define NUM_COLORS	16
@@ -45,13 +48,17 @@ void DrawBox(SDL_Surface *screen, int X, int Y, int width, int height)
 	SDL_Rect area;
 	Uint32 color;
         Uint32 randc;
+#ifdef ANDROID
 	__android_log_print(ANDROID_LOG_INFO, "libgraywin", "DrawBox 01");
+#endif
 	/* Seed the random number generator */
 	if ( seeded == 0 ) {
 		srand(time(NULL));
 		seeded = 1;
 	}
+#ifdef ANDROID
 	__android_log_print(ANDROID_LOG_INFO, "libgraywin", "DrawBox 02");
+#endif
 	/* Get the bounds of the rectangle */
 	area.w = (rand()%width);
 	area.h = (rand()%height);
@@ -81,19 +88,29 @@ void DrawBox(SDL_Surface *screen, int X, int Y, int width, int height)
         {
             color = SDL_MapRGB(screen->format, randc, randc, randc);
         }
+#ifdef ANDROID
 	__android_log_print(ANDROID_LOG_INFO, "libgraywin", "DrawBox 03, %x", color);
+#endif
 	/* Do it! */
 	SDL_FillRect(screen, &area, color);
+#ifdef ANDROID
 	__android_log_print(ANDROID_LOG_INFO, "libgraywin", "DrawBox 04");
+#endif
 	if ( screen->flags & SDL_DOUBLEBUF ) {
+#ifdef ANDROID
 		__android_log_print(ANDROID_LOG_INFO, "libgraywin", "DrawBox 05");
+#endif
 		SDL_Flip(screen);
 	} else {
+#ifdef ANDROID
 		__android_log_print(ANDROID_LOG_INFO, "libgraywin", "DrawBox 05 else, %d, %d, %d, %d",
 			area.w, area.h, area.x, area.y);
+#endif
 		SDL_UpdateRects(screen, 1, &area);
 	}
+#ifdef ANDROID
 	__android_log_print(ANDROID_LOG_INFO, "libgraywin", "DrawBox end");
+#endif
 }
 
 void DrawBackground(SDL_Surface *screen)
@@ -181,22 +198,23 @@ int main(int argc, char *argv[])
 	int    done;
 	SDL_Event event;
 	int width, height, bpp;
-
+#ifdef ANDROID
 	__android_log_print(ANDROID_LOG_INFO, "libgraywin", "main 01");
-
+#endif
 	/* Initialize SDL */
 	if ( SDL_Init(SDL_INIT_VIDEO) < 0 ) {
 		fprintf(stderr, "Couldn't initialize SDL: %s\n",SDL_GetError());
 		exit(1);
 	}
-
+#ifdef ANDROID
 	__android_log_print(ANDROID_LOG_INFO, "libgraywin", "main 02");
+#endif
 
 	/* See if we try to get a hardware colormap */
 	width = 640;
 	height = 480;
 	bpp = 24; //8;
-	videoflags = SDL_DOUBLEBUF; //SDL_SWSURFACE;
+	videoflags = SDL_DOUBLEBUF; //SDL_SWSURFACE; //
 	/*
 	while ( argc > 1 ) {
 		--argc;
@@ -236,32 +254,41 @@ int main(int argc, char *argv[])
 		}
 	}
 	*/
-
+#ifdef ANDROID
 	__android_log_print(ANDROID_LOG_INFO, "libgraywin", "main 03");
-
+#endif
 	/* Set a video mode */
 	screen = CreateScreen(width, height, bpp, videoflags);
 	if ( screen == NULL ) {
 		exit(2);
 	}
-
+#ifdef ANDROID
 	__android_log_print(ANDROID_LOG_INFO, "libgraywin", "main 04");
-
-        DrawBackground(screen);
+#endif
+#ifdef _MSC_VER
+			OutputDebugStringA("DrawBackground 1\n");
+#endif
+			DrawBackground(screen);
 
 	/* Wait for a keystroke */
 	done = 0;
 	while ( !done ) {
+#ifdef ANDROID
 		__android_log_print(ANDROID_LOG_INFO, "libgraywin", "SDL_WaitEvent");
+#endif
 		SDL_WaitEvent(&event);
 		switch (event.type) {
 			case SDL_MOUSEBUTTONDOWN:
+#ifdef ANDROID
 				__android_log_print(ANDROID_LOG_INFO, "libgraywin", "SDL_MOUSEBUTTONDOWN : %d, %d, %d, %d",
 					event.button.x, event.button.y, width, height);
+#endif
 				DrawBox(screen, event.button.x, event.button.y, width, height);
 				break;
 			case SDL_KEYDOWN:
+#ifdef ANDROID
 				__android_log_print(ANDROID_LOG_INFO, "libgraywin", "SDL_KEYDOWN");
+#endif
 				/* Ignore ALT-TAB for windows */
 				if ( (event.key.keysym.sym == SDLK_LALT) ||
 				     (event.key.keysym.sym == SDLK_TAB) ) {
@@ -284,21 +311,33 @@ int main(int argc, char *argv[])
 					"Couldn't toggle fullscreen mode\n");
 						done = 1;
 					}
-                                        DrawBackground(screen);
+#ifdef _MSC_VER
+							OutputDebugStringA("DrawBackground 2\n");
+#endif
+							DrawBackground(screen);
 					break;
 				}
 				/* Any other key quits the application... */
 			case SDL_QUIT:
+#ifdef ANDROID
 				__android_log_print(ANDROID_LOG_INFO, "libgraywin", "SDL_QUIT");
+#endif
 				done = 1;
 				break;
 			case SDL_VIDEOEXPOSE:
+#ifdef ANDROID
 				__android_log_print(ANDROID_LOG_INFO, "libgraywin", "SDL_VIDEOEXPOSE");
-				DrawBackground(screen);
+#endif
+#ifdef _MSC_VER
+						OutputDebugStringA("DrawBackground 3\n");
+#endif
+						DrawBackground(screen);
 				break;
 			case SDL_VIDEORESIZE:
+#ifdef ANDROID
 				__android_log_print(ANDROID_LOG_INFO, "libgraywin", "SDL_VIDEORESIZE");
-					screen = CreateScreen(
+#endif
+				screen = CreateScreen(
 						event.resize.w, event.resize.h,
 						screen->format->BitsPerPixel,
 								videoflags);
@@ -307,17 +346,22 @@ int main(int argc, char *argv[])
 					"Couldn't resize video mode\n");
 						done = 1;
 					}
-					DrawBackground(screen);
+#ifdef _MSC_VER
+							OutputDebugStringA("DrawBackground 4\n");
+#endif
+							DrawBackground(screen);
 				break;
 			default:
+#ifdef ANDROID
 				__android_log_print(ANDROID_LOG_INFO, "libgraywin", "default");
+#endif
 				break;
 		}
 	}
 	SDL_Quit();
-
+#ifdef ANDROID
 	__android_log_print(ANDROID_LOG_INFO, "libgraywin", "main return");
-	
+#endif
 	exit(0);
 	return(0);
 }

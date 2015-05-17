@@ -1152,14 +1152,14 @@ SDL_Surface *sge_TTF_Render(sge_TTFont *font,const Uint16 *text, SDL_Color fg, S
 				switch(_sge_TTF_AA){
 				
 					case 0:{  /* Normal */	
-						src = font->current->pixmap.buffer + row * font->current->pixmap.pitch;
+						src = (Uint8 *)(font->current->pixmap.buffer + row * font->current->pixmap.pitch);
 						for ( col=w; col>0; --col ) {
 							*dst++ |= (*src++<NUM_GRAYS/2)? 0:1;
 						}	
 					}
 					break;
 					case 1:{  /* Antialiasing */
-						src = font->current->pixmap.buffer + row * font->current->pixmap.pitch;
+						src = (Uint8 *)(font->current->pixmap.buffer + row * font->current->pixmap.pitch);
 						for ( col=w; col>0; --col ) {
 							*dst++ |= *src++;
 						}	
@@ -1378,7 +1378,8 @@ SDL_Rect sge_tt_textoutf(SDL_Surface *Surface, sge_TTFont *font, Sint16 x, Sint1
 	va_list ap;
 	
 	#if defined(__WIN32__) && !defined(__MINGW32__)
-	va_start((va_list*)ap, format); //Stupid win32 crosscompiler
+	//va_start((va_list*)ap, format); //Stupid win32 crosscompiler
+	va_start(ap, format); //Stupid win32 crosscompiler
 	#else
 	va_start(ap, format);
 	#endif

@@ -20,6 +20,41 @@
 # endif /* _WIN32_WCE_EMULATION */
 #endif /* main */
 
+#ifndef NO_STDIO_REDIRECT
+/*================================*/
+
+#ifdef _WIN32_WCE
+# define DIR_SEPERATOR TEXT("\\")
+# undef _getcwd
+# define _getcwd(str,len)	wcscpy(str,TEXT(""))
+# define setbuf(f,b)
+# define setvbuf(w,x,y,z)
+# define fopen		_wfopen
+# define freopen	_wfreopen
+# define remove(x)	DeleteFile(x)
+#else
+# define DIR_SEPERATOR TEXT("/")
+# include <direct.h>
+#endif
+
+/* The standard output files */
+#define STDOUT_FILE	TEXT("stdout.txt")
+#define STDERR_FILE	TEXT("stderr.txt")
+
+/* Set a variable to tell if the stdio redirect has been enabled. */
+static int stdioRedirectEnabled = 0;
+
+#ifdef _WIN32_WCE
+  static wchar_t stdoutPath[MAX_PATH];
+  static wchar_t stderrPath[MAX_PATH];
+#else
+  static char stdoutPath[MAX_PATH];
+  static char stderrPath[MAX_PATH];
+#endif
+
+/*================================*/
+#endif // NO_STDIO_REDIRECT
+
 #if defined(_WIN32_WCE) && _WIN32_WCE < 300
 /* seems to be undefined in Win CE although in online help */
 #define isspace(a) (((CHAR)a == ' ') || ((CHAR)a == '\t'))
@@ -126,6 +161,89 @@ OutOfMemory(void)
     return FALSE;
 }
 
+
+
+
+#ifndef NO_STDIO_REDIRECT
+/*================================*/
+
+
+/* Redirect the output (stdout and stderr) to a file */
+static void redirect_output(void)
+{
+	DWORD pathlen;
+#ifdef _WIN32_WCE
+	wchar_t path[MAX_PATH];
+#else
+	char path[MAX_PATH];
+#endif
+	FILE *newfp;
+
+	pathlen = GetModuleFileName(NULL, path, SDL_arraysize(path));
+	while ( pathlen > 0 && path[pathlen] != '\\' ) {
+		--pathlen;
+	}
+	path[pathlen] = '\0';
+
+#ifdef _WIN32_WCE
+	wcsncpy( stdoutPath, path, SDL_arraysize(stdoutPath) );
+	wcsncat( stdoutPath, DIR_SEPERATOR STDOUT_FILE, SDL_arraysize(stdoutPath) );
+#else
+	SDL_strlcpy( stdoutPath, path, SDL_arraysize(stdoutPath) );
+	SDL_strlcat( stdoutPath, DIR_SEPERATOR STDOUT_FILE, SDL_arraysize(stdoutPath) );
+#endif
+    
+	/* Redirect standard input and standard output */
+	newfp = freopen(stdoutPath, TEXT("w"), stdout);
+
+#ifndef _WIN32_WCE
+	if ( newfp == NULL ) {	/* This happens on NT */
+#if !defined(stdout)
+		stdout = fopen(stdoutPath, TEXT("w"));
+#else
+		newfp = fopen(stdoutPath, TEXT("w"));
+		if ( newfp ) {
+			*stdout = *newfp;
+		}
+#endif
+	}
+#endif /* _WIN32_WCE */
+
+#ifdef _WIN32_WCE
+	wcsncpy( stderrPath, path, SDL_arraysize(stdoutPath) );
+	wcsncat( stderrPath, DIR_SEPERATOR STDOUT_FILE, SDL_arraysize(stdoutPath) );
+#else
+	SDL_strlcpy( stderrPath, path, SDL_arraysize(stderrPath) );
+	SDL_strlcat( stderrPath, DIR_SEPERATOR STDERR_FILE, SDL_arraysize(stderrPath) );
+#endif
+
+	newfp = freopen(stderrPath, TEXT("w"), stderr);
+#ifndef _WIN32_WCE
+	if ( newfp == NULL ) {	/* This happens on NT */
+#if !defined(stderr)
+		stderr = fopen(stderrPath, TEXT("w"));
+#else
+		newfp = fopen(stderrPath, TEXT("w"));
+		if ( newfp ) {
+			*stderr = *newfp;
+		}
+#endif
+	}
+#endif /* _WIN32_WCE */
+
+	setvbuf(stdout, NULL, _IOLBF, BUFSIZ);	/* Line buffered */
+	setbuf(stderr, NULL);			/* No buffering */
+	stdioRedirectEnabled = 1;
+}
+
+/*================================*/
+#endif /*NO_STDIO_REDIRECT*/
+
+
+
+
+
+
 #if defined(_MSC_VER) && !defined(_WIN32_WCE)
 /* The VC++ compiler needs main defined */
 #define console_main main
@@ -136,6 +254,10 @@ int
 console_main(int argc, char *argv[])
 {
     int status;
+
+#ifndef NO_STDIO_REDIRECT
+	redirect_output();
+#endif
 
     /* Run the application main() code */
     status = SDL_main(argc, argv);

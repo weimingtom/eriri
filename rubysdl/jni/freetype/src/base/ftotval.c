@@ -19,7 +19,14 @@
 #include FT_INTERNAL_OBJECTS_H
 #include FT_SERVICE_OPENTYPE_VALIDATE_H
 #include FT_OPENTYPE_VALIDATE_H
-
+/*
+#if !defined(_MSC_VER) || _MSC_VER_ > 1200 //VC 6
+#else
+#include <freetype/internal/ftobjs.h>
+#include <freetype/internal/services/svotval.h>
+#include <freetype/internal/ftvalid.h>
+#endif
+*/
 
   /* documentation is in ftotval.h */
 

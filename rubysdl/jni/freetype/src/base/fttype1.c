@@ -20,7 +20,14 @@
 #include FT_INTERNAL_OBJECTS_H
 #include FT_INTERNAL_SERVICE_H
 #include FT_SERVICE_POSTSCRIPT_INFO_H
-
+/*
+#if !defined(_MSC_VER) || _MSC_VER_ > 1200 //VC 6
+#else
+#include <freetype/internal/ftobjs.h>
+#include <freetype/internal/ftserv.h>
+#include <freetype/internal/services/svpsinfo.h>
+#endif
+*/
 
   /* documentation is in t1tables.h */
 

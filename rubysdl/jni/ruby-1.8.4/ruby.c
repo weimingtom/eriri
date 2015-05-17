@@ -1235,7 +1235,9 @@ load_file(fname, script)
 	}
 	require_libraries();	/* Why here? unnatural */
 	if (NIL_P(c)) return;
-    }
+    } else {
+		require_libraries();	/* Why here? unnatural */
+	}
 	if (is_memory) {
 #if 0
 		static char *str = 

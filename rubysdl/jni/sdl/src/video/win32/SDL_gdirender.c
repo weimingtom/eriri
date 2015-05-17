@@ -906,7 +906,7 @@ GDI_RenderCopy(SDL_Renderer * renderer, SDL_Texture * texture,
             AC_SRC_OVER,
             0,
             texture->a,
-            AC_SRC_ALPHA
+            AC_SRC_NO_PREMULT_ALPHA/*AC_SRC_ALPHA*/
         };
         if (!AlphaBlend
             (data->current_hdc, dstrect->x, dstrect->y, dstrect->w,
