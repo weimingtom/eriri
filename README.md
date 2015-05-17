@@ -17,7 +17,7 @@ https://www.ruby-lang.org/ja/
 https://www.kmc.gr.jp/~ohai/rubysdl.html  
 * ONScripter on Android  
 http://onscripter.sourceforge.jp/android/android.html  
-* sdlruby_loader
+* sdlruby_loader  
 https://onedrive.live.com/?cid=1A0406E116655303&id=1a0406e116655303%21108&authkey=%21AEU0L3HpCKm7YLU  
 http://toro.2ch.sc/test/read.cgi/gamedev/1207069887/l50  
 
