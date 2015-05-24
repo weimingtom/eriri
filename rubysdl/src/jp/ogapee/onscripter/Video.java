@@ -131,6 +131,9 @@ class DemoRenderer extends GLSurfaceView_SDL.Renderer {
 			String line;
 			while (null != (line = rbuf.readLine())) {
 				sb.append(line);
+				if (D) {
+					Log.e(TAG, "readfile " + filename + " return ====> " + line);
+				}
 				sb.append("\n");
 			}
 		} catch (IOException e) {
@@ -158,9 +161,9 @@ class DemoRenderer extends GLSurfaceView_SDL.Renderer {
 				}
 			}
 		}
-		if (D) {
-			Log.e(TAG, "readfile " + filename + " return ====> " + sb.toString());
-		}
+//		if (D) {
+//			Log.e(TAG, "readfile " + filename + " return ====> " + sb.toString());
+//		}
 		return sb.toString();
     }
 	

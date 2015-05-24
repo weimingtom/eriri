@@ -1,2 +1,2 @@
 rmdir /S /Q Debug Release
-del  /Q *.ncb *.opt *.suo
+del  /Q *.ncb *.opt *.suo *.plg

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">连连看</string>
-    <string name="version">enjoyllk 1.0\nweimingtom</string>
+    <string name="app_name">rubysdl</string>
+    <string name="version">rubysdl 1.0\nweimingtom</string>
     <bool name="use_launcher">true</bool>
     <bool name="use_download">false</bool>
     <bool name="button_visible">true</bool>

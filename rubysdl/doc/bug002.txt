@@ -1,0 +1,13 @@
+05-23 23:19:36.967: A//system/bin/app_process(3852): stack corruption detected: aborted
+
+caused by overflowing an c array
+
+		char file_content[2048]= {0};
+		ruby_jni_callback_readfile(fname, file_content, sizeof(file_content));
+		rb_compile_string(fname, rb_str_new2(file_content), 1);
+		
+2048 is too small, 
+but this is OK when running under Windows,
+It's hard to find the reason of this problem.
+
+modifying this code and use calloc instead.

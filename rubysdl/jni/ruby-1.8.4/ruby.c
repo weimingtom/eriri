@@ -88,7 +88,7 @@ int ruby_jni_callback_isfileexist(const char* str)
     return 0;
 }
 
-void ruby_jni_callback_readfile(const char* str, char *output, int size)
+char *ruby_jni_callback_readfile(const char* str)
 {
     jclass stringClass;
     jmethodID cid;
@@ -100,6 +100,8 @@ void ruby_jni_callback_readfile(const char* str, char *output, int size)
     JNIEnv * env;
     jobject obj;
     jstring jstr;
+	char *output;
+	int size;
 
     //__android_log_print(ANDROID_LOG_INFO, "ruby.c", "[%s:%d %s]%s", __FILE__, __LINE__, __FUNCTION__, "ruby_jni_callback_readfile 1");
 
@@ -117,19 +119,19 @@ void ruby_jni_callback_readfile(const char* str, char *output, int size)
 		stringClass = (*env)->FindClass(env, "java/lang/String");
 		if (stringClass == NULL)
 		{
-			return ;
+			return NULL;
 		}
 
 		cid = (*env)->GetMethodID(env, stringClass, "<init>", "([C)V");
 		if (cid == NULL)
 		{
-			return ;
+			return NULL;
 		}
 
 		elemArr = (*env)->NewCharArray(env, len);
 		if (elemArr == NULL)
 		{
-			return ;
+			return NULL;
 		}
 
 		(*env)->SetCharArrayRegion(env, elemArr, 0, len, chars);
@@ -144,10 +146,12 @@ void ruby_jni_callback_readfile(const char* str, char *output, int size)
 			//__android_log_print(ANDROID_LOG_INFO, "ruby.c", "[%s:%d %s]%s", __FILE__, __LINE__, __FUNCTION__, "ruby_jni_callback_readfile 2");
 		    str = (*env)->GetStringUTFChars(env, jstr, 0);
 		    if (str == NULL) {
-		        return;
+		        return NULL;
 		    }
 		    //__android_log_print(ANDROID_LOG_INFO, "ruby.c", "[%s:%d %s]%s", __FILE__, __LINE__, __FUNCTION__, "ruby_jni_callback_readfile 3");
-		    strcpy(output, str);
+		    size = strlen(str) + 1;
+			output = (char *)calloc(size, 1);
+			strcpy(output, str);
 		    (*env)->ReleaseStringUTFChars(env, jstr, str);
 		}
 		(*env)->DeleteLocalRef(env, result);
@@ -158,7 +162,9 @@ void ruby_jni_callback_readfile(const char* str, char *output, int size)
 			free(chars);
 			chars = NULL;
 		}
+		return output;
     }
+	return NULL;
 }
 
 void ruby_jni_callback_log(const char* str)
@@ -327,23 +333,37 @@ int ruby_isfileexist(const char *fname)
 	return 1;
 }
 
-void ruby_readfile(const char* fname, char *output, int size)
+static long fgetlength(FILE *stream)   
+{   
+    long   filesize=0;   
+    long   oldseek=ftell(stream);   
+    fseek(stream, 0L, SEEK_END);   
+    filesize=ftell(stream);   
+    fseek(stream, oldseek, 0);   
+    return filesize;   
+}
+
+char *ruby_readfile(const char* fname)
 {
 	char real_path[1024] = {0};
 	FILE *fp = NULL;
+	long size = 0;
+	char *output = NULL;
 
 	if (fname == NULL || *fname == '\0') {
-		return;
+		return NULL;
 	}
 	sprintf(real_path, "%s/%s", RUBY_MEMORY_FILE_PATH, fname);
 	fp = fopen(real_path, "r");
 	if (fp == NULL) {
-		return;
+		return NULL;
 	}
+	size = fgetlength(fp) + 1;
+	output = (char *)calloc(size, 1);
 	fread(output, size, 1, fp);
 	fclose(fp);
 
-	return;
+	return output;
 }
 #endif
 
@@ -1257,13 +1277,19 @@ load_file(fname, script)
 #endif
 
 #if defined ANDROID
-		char file_content[2048]= {0};
-		ruby_jni_callback_readfile(fname, file_content, sizeof(file_content));
-		rb_compile_string(fname, rb_str_new2(file_content), 1);
+		char *file_content = ruby_jni_callback_readfile(fname);
+		if (file_content != NULL) {
+			rb_compile_string(fname, rb_str_new2(file_content), 1);
+			free(file_content);
+			file_content = NULL;
+		}
 #else
-		char file_content[2048]= {0};
-		ruby_readfile(fname, file_content, sizeof(file_content));
-		rb_compile_string(fname, rb_str_new2(file_content), 1);
+		char *file_content = ruby_readfile(fname);
+		if (file_content != NULL) {
+			rb_compile_string(fname, rb_str_new2(file_content), 1);
+			free(file_content);
+			file_content = NULL;
+		}
 #endif
 	} else {
 		rb_compile_file(fname, f, line_start);

@@ -400,7 +400,7 @@
 #define RUBY_MEMORY_FILE_PATH "../../assets"
 
 //for vc6 debug
-#define DEBUG_NO_SIGNAL 0
+#define DEBUG_NO_SIGNAL 1
 
 //for calling ruby_init multi times, 
 // and skip rb_gc_call_finalizer_at_exit()

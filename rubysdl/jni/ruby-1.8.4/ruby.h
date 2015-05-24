@@ -566,7 +566,7 @@ VALUE rb_require _((const char*));
 #if defined ANDROID
 void ruby_init_jni(JNIEnv *, jobject);
 int ruby_jni_callback_isfileexist(const char *fname);
-void ruby_jni_callback_readfile(const char* fname, char *output, int size);
+char *ruby_jni_callback_readfile(const char* fname);
 #endif
 void ruby_init _((void));
 void ruby_options _((int, char**));
