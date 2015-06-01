@@ -199,4 +199,7 @@ typedef unsigned int uintptr_t;
 #define SDL_ASSEMBLY_ROUTINES	1
 #endif
 
+//for android assets path emulation
+#define SDL_MEMORY_FILE_PATH "../../assets"
+
 #endif /* _SDL_config_win32_h */

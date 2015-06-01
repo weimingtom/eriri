@@ -28,8 +28,10 @@ JAVA_EXPORT_NAME(ONScripter_nativeGetHeight) ( JNIEnv*  env, jobject thiz )
 int main(int argc, char *argv[])
 {
 	int ret;
-	const char *script = 
-		"aadraw.rb";
+	const char *script = argv[1];
+		//"alphadraw.rb";
+		//"alpha.rb";
+		//"aadraw.rb";
 		//"test_fib.rb";
 
 	ruby_debug = Qtrue;

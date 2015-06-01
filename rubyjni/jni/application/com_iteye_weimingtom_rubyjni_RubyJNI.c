@@ -1,5 +1,6 @@
 #include "com_iteye_weimingtom_rubyjni_RubyJNI.h"
 #include <stdlib.h>
+#include <stdio.h>
 #include <ruby.h>
 
 extern int main(int argc, char **argv, char **envp);

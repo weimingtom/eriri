@@ -83,7 +83,20 @@ typedef struct SDL_RWops
     Uint32 type;
     union
     {
-#ifdef __WIN32__
+#if defined(ANDROID)
+        struct
+        {
+            void *fileNameRef;
+            void *inputStreamRef;
+            void *readableByteChannelRef;
+            void *readMethod;
+            void *assetFileDescriptorRef;
+            long position;
+            long size;
+            long offset;
+            int fd;
+        } androidio;
+#elif defined(__WIN32__)
         struct
         {
             SDL_bool append;

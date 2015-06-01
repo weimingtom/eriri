@@ -112,6 +112,19 @@ SOURCE=.\src\audio\windib\sdl_dibaudio.c
 SOURCE=.\src\audio\disk\sdl_diskaudio.c
 # End Source File
 # End Group
+# Begin Group "audio_android"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\src\audio\android\SDL_androidaudio.c
+# PROP Exclude_From_Build 1
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\audio\android\SDL_androidaudio.h
+# End Source File
+# End Group
 # Begin Source File
 
 SOURCE=.\src\audio\sdl_audio.c
@@ -578,5 +591,210 @@ SOURCE=.\src\sdl_error.c
 SOURCE=.\src\sdl_fatal.c
 # End Source File
 # End Group
+# Begin Group "include"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\include\begin_code.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\close_code.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\SDL.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\SDL_assert.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\SDL_atomic.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\SDL_audio.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\SDL_compat.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\SDL_config.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\SDL_config_android.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\SDL_config_iphoneos.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\SDL_config_macosx.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\SDL_config_minimal.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\SDL_config_nintendods.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\SDL_config_pandora.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\SDL_config_win32.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\SDL_config_wiz.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\SDL_copying.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\SDL_cpuinfo.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\SDL_endian.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\SDL_error.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\SDL_events.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\SDL_haptic.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\SDL_input.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\SDL_joystick.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\SDL_keyboard.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\SDL_keysym.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\SDL_loadso.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\SDL_main.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\SDL_mouse.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\SDL_mutex.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\SDL_name.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\SDL_opengl.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\SDL_opengles.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\SDL_pixels.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\SDL_platform.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\SDL_power.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\SDL_quit.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\SDL_rect.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\SDL_revision.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\SDL_rwops.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\SDL_scancode.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\SDL_stdinc.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\SDL_surface.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\SDL_syswm.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\SDL_thread.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\SDL_timer.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\SDL_types.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\SDL_version.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\include\SDL_video.h
+# End Source File
+# End Group
+# Begin Source File
+
+SOURCE=.\sdl_main.c
+# PROP Exclude_From_Build 1
+# End Source File
 # End Target
 # End Project

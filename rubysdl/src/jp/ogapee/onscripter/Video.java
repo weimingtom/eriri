@@ -20,6 +20,7 @@ import android.view.KeyEvent;
 import android.media.AudioManager;
 
 class DemoRenderer extends GLSurfaceView_SDL.Renderer {
+	private static Context mSingleton;
 	private Activity context = null;
 	private EGL10 mEgl = null;
 	private EGLDisplay mEglDisplay = null;
@@ -27,8 +28,13 @@ class DemoRenderer extends GLSurfaceView_SDL.Renderer {
 	private EGLContext mEglContext = null;
 	private int skipFrames = 0;
 	
+	public static Context getContext() {
+		return mSingleton;
+	}
+	
 	public DemoRenderer(Activity _context) {
 		context = _context;
+		mSingleton = _context;
 		//FIXME:
 		/**
 		 * E/libEGL(3404): call to OpenGL ES API with no current context 
@@ -69,8 +75,14 @@ class DemoRenderer extends GLSurfaceView_SDL.Renderer {
 	@Override
 	public void onDrawFrame(GL10 gl) {
 		nativeInitJavaCallbacks();
-		nativeInit(ONScripter.gCurrentDirectoryPath, false,
-				ONScripter.gDisableRescale);
+		nativeInit(ONScripter.gCurrentDirectoryPath, 
+			false,
+			ONScripter.gDisableRescale, 
+			//"alphadraw.rb"
+			"alpha.rb"
+			//"aadraw.rb"
+			//"test_fib.rb"
+		);
 	}
 
 	//FIXME: jni\sdl\src\video\android\SDL_androidvideo.c
@@ -79,7 +91,7 @@ class DemoRenderer extends GLSurfaceView_SDL.Renderer {
 	//FIXME: jni\sdl\src\video\android\SDL_androidvideo.c
 	//FIXME: jni\sdl_main\sdl_main.c
 	private native void nativeInit(String currentDirectoryPath, boolean oo,
-			boolean dr);
+			boolean dr, String script);
 
 	//FIXME: jni\sdl\src\video\android\SDL_androidvideo.c
 	private native void nativeResize(int w, int h);

@@ -87,7 +87,7 @@ static size_t audioBufferSize = 0;
 
 // Extremely wicked JNI environment to call Java functions from C code
 static jbyteArray audioBufferJNI = NULL;
-static JavaVM *jniVM = NULL;
+/*static*/ JavaVM *jniVM = NULL;
 static jobject JavaAudioThread = NULL;
 static jmethodID JavaInitAudio = NULL;
 static jmethodID JavaDeinitAudio = NULL;
@@ -253,11 +253,14 @@ JNIEXPORT jint JNICALL JAVA_EXPORT_NAME(AudioThread_nativeAudioInitJavaCallbacks
 	*/
 }
 
+/*FIXME: defined in SDL_rwops.c */
+/*
 JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *reserved)
 {
 	jniVM = vm;
 	return JNI_VERSION_1_2;
 };
+*/
 
 JNIEXPORT void JNICALL JNI_OnUnload(JavaVM *vm, void *reserved)
 {

@@ -5,6 +5,7 @@ Porting Ruby 1.8 (mini version) and Ruby/SDL to Android JNI
 Eriri is also the name of a character (英梨々) in Saekano: How to Raise a Boring Girlfriend.  
 
 ## History:  
+2015-06-02: Running alpha.rb and alphadraw.rb success (using SDL2 source).   
 2015-05-24: Running aadraw.rb (a sample of Ruby/SDL) success on Android and Visual Studio C++ 6.0.   
 2015-05-17: Rubysdl VC6 project (test version).   
 2015-05-10: Create rubysdl Android project, merging with rubyjni.  
@@ -20,7 +21,9 @@ https://www.kmc.gr.jp/~ohai/rubysdl.html
 http://onscripter.sourceforge.jp/android/android.html  
 * sdlruby_loader  
 https://onedrive.live.com/?cid=1A0406E116655303&id=1a0406e116655303%21108&authkey=%21AEU0L3HpCKm7YLU  
-http://toro.2ch.sc/test/read.cgi/gamedev/1207069887/l50  
+http://toro.2ch.sc/test/read.cgi/gamedev/1207069887/l50   
+* SDL 2.0.3   
+http://www.libsdl.org/download-2.0.php  
 
 ## TODO:  
 * (**FINISH**)rubysdl VC6 project.  
