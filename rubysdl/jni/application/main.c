@@ -1,5 +1,6 @@
 #include <ruby.h>
 #include "SDL.h"
+#include <stdlib.h>
 
 #ifdef ANDROID
 #include <jni.h>
@@ -29,10 +30,14 @@ int main(int argc, char *argv[])
 {
 	int ret;
 	const char *script = argv[1];
-		//"alphadraw.rb";
-		//"alpha.rb";
-		//"aadraw.rb";
-		//"test_fib.rb";
+
+	if (script == NULL) {
+		script = 
+			//"alphadraw.rb";
+			"alpha.rb";
+			//"aadraw.rb";
+			//"test_fib.rb";
+	}
 
 	ruby_debug = Qtrue;
 	ruby_verbose = Qtrue;
