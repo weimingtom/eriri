@@ -33,8 +33,18 @@ int main(int argc, char *argv[])
 
 	if (script == NULL) {
 		script = 
+			"testsprite.rb";
+			//"stetris.rb";
+			//"sgetest.rb";
+			//"randrect.rb";
+			//"fpstimer.rb";
+			//"font.rb";
+			//"event2.rb";
+			//"ellipses.rb";
+			//"collision.rb";
+			//"bfont.rb";
 			//"alphadraw.rb";
-			"alpha.rb";
+			//"alpha.rb";
 			//"aadraw.rb";
 			//"test_fib.rb";
 	}
@@ -48,6 +58,6 @@ int main(int argc, char *argv[])
 	rb_load_file(script);
 	ret = ruby_cleanup(ruby_exec());
 
-	//exit(ret);
+	exit(ret);
 	return(ret);
 }

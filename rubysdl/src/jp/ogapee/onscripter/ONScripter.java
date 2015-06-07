@@ -663,11 +663,19 @@ public class ONScripter extends Activity implements
 	public static Boolean gWideScreen = false;
 	public static CheckBox checkDR = null;
 
+	
+	
 	/*
 	//FIXME: onscripter-20120112\ONScripter_sound.cpp
 	private native int nativeInitJavaCallbacks();
 	*/
 	
+	@Override
+	public void onBackPressed() {
+		//super.onBackPressed();
+		this.openOptionsMenu();
+	}
+
 	//FIXME: onscripter-20120112\onscripter_main.cpp
 	private native int nativeGetWidth();
 

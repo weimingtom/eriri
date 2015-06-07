@@ -78,8 +78,18 @@ class DemoRenderer extends GLSurfaceView_SDL.Renderer {
 		nativeInit(ONScripter.gCurrentDirectoryPath, 
 			false,
 			ONScripter.gDisableRescale, 
+			"testsprite.rb"
+			//"stetris.rb"
+			//"sgetest.rb"
+			//"randrect.rb"
+			//"fpstimer.rb"
+			//"font.rb"
+			//"event2.rb"
+			//"ellipses.rb"
+			//"collision.rb"
+			//"bfont.rb"
 			//"alphadraw.rb"
-			"alpha.rb"
+			//"alpha.rb"
 			//"aadraw.rb"
 			//"test_fib.rb"
 		);
@@ -260,7 +270,7 @@ class DemoGLSurfaceView extends GLSurfaceView_SDL {
 			}
 			return true;
 		}
-		if (keyCode == KeyEvent.KEYCODE_MENU) {
+		if (keyCode == KeyEvent.KEYCODE_MENU || keyCode == KeyEvent.KEYCODE_BACK) {
 			super.onKeyDown(keyCode, event);
 			return false;
 		}
@@ -270,7 +280,7 @@ class DemoGLSurfaceView extends GLSurfaceView_SDL {
 
 	@Override
 	public boolean onKeyUp(int keyCode, final KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_MENU) {
+		if (keyCode == KeyEvent.KEYCODE_MENU || keyCode == KeyEvent.KEYCODE_BACK) {
 			super.onKeyUp(keyCode, event);
 			return false;
 		}
