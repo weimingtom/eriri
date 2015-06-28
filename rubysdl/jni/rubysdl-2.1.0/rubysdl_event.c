@@ -85,8 +85,21 @@ static VALUE createActiveEvent(SDL_Event *event)
 
 static VALUE createKeyEvent(VALUE obj, SDL_Event *event)
 {
+	/*INT2NUM(event->key.keysym.sym)*/
+	/*INT2FIX(event->key.keysym.sym)*/
+	/*
+	int k = (0x7fffffff & SDLK_LEFT);
+	int k2 = event->key.keysym.sym;
+	__int32 k3 = k - k2;
+	__int32 k4 = k3;
+	*/
+
   rb_iv_set(obj, "@press", INT2BOOL(event->key.state == SDL_PRESSED));
+#if (SDL_MAJOR_VERSION == 1 && SDL_MINOR_VERSION == 3) || SDL_MAJOR_VERSION == 2
+  rb_iv_set(obj, "@sym", INT2NUM(event->key.keysym.sym));
+#else
   rb_iv_set(obj, "@sym", INT2FIX(event->key.keysym.sym));
+#endif
   rb_iv_set(obj, "@mod", UINT2NUM(event->key.keysym.mod));
 #if SDL_MAJOR_VERSION == 2
   rb_iv_set(obj, "@unicode", UINT2NUM(event->key.keysym.scancode));

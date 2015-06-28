@@ -235,6 +235,7 @@ loop do
     case event
     when SDL::Event::Quit then exit
     when SDL::Event::KeyDown
+	  #print "KeyDown sym:#{event.sym} mod:#{event.mod} #{SDL::Key::LEFT}","\n"
       case event.sym
       when SDL::Key::ESCAPE then exit 
       when SDL::Key::UP     then rotate = true

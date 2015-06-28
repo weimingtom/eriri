@@ -1,0 +1,111 @@
+﻿SDLK_LEFT
+KeyDown sym:-1073741744 mod:0 1073741904
+
+
+static VALUE createKeyEvent(VALUE obj, SDL_Event *event)
+{
+  rb_iv_set(obj, "@press", INT2BOOL(event->key.state == SDL_PRESSED));
+->  rb_iv_set(obj, "@sym", INT2FIX(event->key.keysym.sym));
+  rb_iv_set(obj, "@mod", UINT2NUM(event->key.keysym.mod));
+#if SDL_MAJOR_VERSION == 2
+  rb_iv_set(obj, "@unicode", UINT2NUM(event->key.keysym.scancode));
+#else
+  rb_iv_set(obj, "@unicode", UINT2NUM(event->key.keysym.unicode));
+#endif
+  return obj;
+}
+
+SDL_scancode.h
+
+    SDL_SCANCODE_LEFT = 80,
+    
+    
+scancodes_win32.h
+    /*  37, 0x25 */     SDL_SCANCODE_LEFT,
+    
+    
+-----------------
+SDL_Keyboard.c
+
+
+    keyboard->keystate[scancode] = state;
+
+    /* Post the event, if desired */
+    posted = 0;
+    if (SDL_GetEventState(type) == SDL_ENABLE) {
+        SDL_Event event;
+        event.key.type = type;
+        event.key.state = state;
+        event.key.keysym.scancode = scancode;
+->        event.key.keysym.sym = keyboard->keymap[scancode];
+        event.key.keysym.mod = modstate;
+        event.key.keysym.unicode = 0;
+        event.key.windowID = keyboard->focus ? keyboard->focus->id : 0;
+        posted = (SDL_PushEvent(&event) > 0);
+    }
+    return (posted);
+    
+------------------------
+SDL_win32keyboard.c
+
+
+void
+WIN_UpdateKeymap()
+{
+    int i;
+    SDL_scancode scancode;
+    SDLKey keymap[SDL_NUM_SCANCODES];
+
+    SDL_GetDefaultKeymap(keymap);
+
+    for (i = 0; i < SDL_arraysize(win32_scancode_table); i++) {
+
+        /* Make sure this scancode is a valid character scancode */
+        scancode = win32_scancode_table[i];
+        if (scancode == SDL_SCANCODE_UNKNOWN ||
+            (keymap[scancode] & SDLK_SCANCODE_MASK)) {
+            continue;
+        }
+
+        /* Alphabetic keys are handled specially, since Windows remaps them */
+        if (i >= 'A' && i <= 'Z') {
+            BYTE vsc = alpha_scancodes[i - 'A'];
+            keymap[scancode] = MapVirtualKey(vsc, MAPVK_VSC_TO_VK) + 0x20;
+        } else {
+            keymap[scancode] = (MapVirtualKey(i, MAPVK_VK_TO_CHAR) & 0x7FFF);
+        }
+    }
+->    SDL_SetKeymap(0, keymap, SDL_NUM_SCANCODES);
+}
+
+    
+    
+--------------------
+rubysdl_event.c
+
+static VALUE createKeyEvent(VALUE obj, SDL_Event *event)
+{
+	/*INT2NUM(event->key.keysym.sym)*/
+	/*INT2FIX(event->key.keysym.sym)*/
+	/*
+	int k = (0x7fffffff & SDLK_LEFT);
+	int k2 = event->key.keysym.sym;
+	__int32 k3 = k - k2;
+	__int32 k4 = k3;
+	*/
+
+  rb_iv_set(obj, "@press", INT2BOOL(event->key.state == SDL_PRESSED));
+#if (SDL_MAJOR_VERSION == 1 && SDL_MINOR_VERSION == 3) || SDL_MAJOR_VERSION == 2
+->  rb_iv_set(obj, "@sym", INT2NUM(event->key.keysym.sym));
+#else
+  rb_iv_set(obj, "@sym", INT2FIX(event->key.keysym.sym));
+#endif
+  rb_iv_set(obj, "@mod", UINT2NUM(event->key.keysym.mod));
+#if SDL_MAJOR_VERSION == 2
+  rb_iv_set(obj, "@unicode", UINT2NUM(event->key.keysym.scancode));
+#else
+  rb_iv_set(obj, "@unicode", UINT2NUM(event->key.keysym.unicode));
+#endif
+  return obj;
+}
+

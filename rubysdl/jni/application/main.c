@@ -33,8 +33,8 @@ int main(int argc, char *argv[])
 
 	if (script == NULL) {
 		script = 
-			"testsprite.rb";
-			//"stetris.rb";
+			//"testsprite.rb";
+			"stetris.rb";
 			//"sgetest.rb";
 			//"randrect.rb";
 			//"fpstimer.rb";

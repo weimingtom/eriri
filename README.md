@@ -5,6 +5,7 @@ Porting Ruby 1.8 (mini version) and Ruby/SDL to Android JNI
 Eriri is also the name of a character (英梨々) in Saekano: How to Raise a Boring Girlfriend.  
 
 ## History:  
+2015-06-28: Fix keyboard event bug (SDLK_LEFT) of stetris.rb (under win32).  
 2015-06-07: Running success: bfont.rb, collision.rb, ellipses.rb, event2.rb, font.rb, fpstimer.rb, randrect.rb, sgetest.rb, stetris.rb, testsprite.rb, but keyboard event response and color key are not available now.    
 2015-06-02: Running alpha.rb and alphadraw.rb success (using SDL2 source).   
 2015-05-24: Running aadraw.rb (a sample of Ruby/SDL) success on Android and Visual Studio C++ 6.0.   
