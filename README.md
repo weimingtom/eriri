@@ -5,6 +5,7 @@ Porting Ruby 1.8 (mini version) and Ruby/SDL to Android JNI
 Eriri is also the name of a character (英梨々) in Saekano: How to Raise a Boring Girlfriend.  
 
 ## History:  
+2015-11-29: Reduce android view counts (just one LinearLayout and one DemoGLSurfaceView, see ONScripter.java). Now SDL::Screen.open may returns a screen smaller than DemoGLSurfaceView (bottom left alignment). I like this, which is different from origin (I use alpha.rb for test).  
 2015-08-08: Create mrubyjni, using NDK & VC6, only testing mrb_load_string.   
 2015-06-28: Fix keyboard event bug (SDLK_LEFT) of stetris.rb (under win32).  
 2015-06-07: Running success: bfont.rb, collision.rb, ellipses.rb, event2.rb, font.rb, fpstimer.rb, randrect.rb, sgetest.rb, stetris.rb, testsprite.rb, but keyboard event response and color key are not available now.    

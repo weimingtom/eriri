@@ -34,6 +34,10 @@
 #include "../events/SDL_sysevents.h"
 #include "../events/SDL_events_c.h"
 
+#if defined(ANDROID)
+#include <android/log.h>
+#endif
+
 #if SDL_VIDEO_OPENGL_ES
 #include "SDL_opengles.h"
 #endif /* SDL_VIDEO_OPENGL_ES */
@@ -927,6 +931,12 @@ SDL_CreateWindow(const char *title, int x, int y, int w, int h, Uint32 flags)
         display->windows->prev = window;
     }
     display->windows = window;
+
+#if defined(ANDROID)
+	__android_log_print(ANDROID_LOG_ERROR, "SDL_video.c",
+		"SDL_CreateWindow - x=%d, y=%d, w=%d, h=%d, _this->CreateWindow=%p",
+		window->x, window->y, window->w, window->h, _this->CreateWindow);
+#endif
 
     if (_this->CreateWindow && _this->CreateWindow(_this, window) < 0) {
         SDL_DestroyWindow(window);

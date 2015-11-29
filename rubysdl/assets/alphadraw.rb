@@ -21,5 +21,6 @@ while true
     end
   end
 
-  sleep 0.2
+  #sleep 0.2
+  sleep 0.05
 end

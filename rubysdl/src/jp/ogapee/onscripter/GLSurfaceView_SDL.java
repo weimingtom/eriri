@@ -20,7 +20,10 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 public class GLSurfaceView_SDL extends SurfaceView implements SurfaceHolder.Callback {
-    public final static int RENDERMODE_WHEN_DIRTY = 0;
+	private static final boolean D = true;
+	private static final String TAG = "GLSurfaceView_SDL";
+	
+	public final static int RENDERMODE_WHEN_DIRTY = 0;
     public final static int RENDERMODE_CONTINUOUSLY = 1;
     public final static int DEBUG_CHECK_GL_ERROR = 1;
     public final static int DEBUG_LOG_GL_CALLS = 2;
@@ -437,6 +440,9 @@ public class GLSurfaceView_SDL extends SurfaceView implements SurfaceHolder.Call
                     mRenderer.onSurfaceChanged(mGL, w, h);
                     tellRendererSurfaceChanged = false;
                 }
+        		if (D) {
+        			Log.d(TAG, "SwapBuffers : w = " + w + ", h = " + h);
+        		}
                 return mEglHelper.swap();
             } catch (java.lang.InterruptedException e) {
                return false;

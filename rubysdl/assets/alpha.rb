@@ -9,7 +9,8 @@ image = image.display_format
 
 
 i=0;
-black = screen.format.map_rgb(0,0,0)
+#black = screen.format.map_rgb(0,0,0)
+black = screen.format.map_rgb(0,0,255)
 while true
   while event = SDL::Event.poll
     case event
@@ -23,4 +24,6 @@ while true
   screen.put(image,310,195)
     i+=1
   screen.flip
+  
+  sleep 0.005
 end

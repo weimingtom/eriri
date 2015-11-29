@@ -21,6 +21,10 @@
 */
 #include "SDL_config.h"
 
+#if defined(ANDROID)
+#include <android/log.h>
+#endif
+
 #if SDL_VIDEO_RENDER_OGL_ES
 
 #include "SDL_video.h"
@@ -337,6 +341,12 @@ GLES_ActivateRenderer(SDL_Renderer * renderer)
     GLES_RenderData *data = (GLES_RenderData *) renderer->driverdata;
     SDL_Window *window = renderer->window;
 
+
+#if defined(ANDROID)
+	__android_log_print(ANDROID_LOG_ERROR, "SDL_renderer_gles.c",
+		"GLES_ActivateRenderer - ");
+#endif
+
     if (SDL_GL_MakeCurrent(window, data->context) < 0) {
         return -1;
     }
@@ -349,6 +359,11 @@ GLES_ActivateRenderer(SDL_Renderer * renderer)
         data->glOrthof(0.0, (GLfloat) window->w, (GLfloat) window->h, 0.0,
                        0.0, 1.0);
         data->updateSize = SDL_FALSE;
+
+#if defined(ANDROID)
+        __android_log_print(ANDROID_LOG_ERROR, "SDL_renderer_gles.c",
+        	"GLES_ActivateRenderer - w=%f, h=%f", (GLfloat) window->w, (GLfloat) window->h);
+#endif
     }
     return 0;
 }
@@ -611,6 +626,11 @@ GLES_DirtyTexture(SDL_Renderer * renderer, SDL_Texture * texture,
     GLES_TextureData *data = (GLES_TextureData *) texture->driverdata;
     int i;
 
+#if defined(ANDROID)
+	//__android_log_print(ANDROID_LOG_INFO, "SDL_renderer_gles.c",
+	//	"GLES_DirtyTexture - ");
+#endif
+
     for (i = 0; i < numrects; ++i) {
         SDL_AddDirtyRect(&data->dirty, &rects[i]);
     }
@@ -775,6 +795,12 @@ GLES_RenderFillRects(SDL_Renderer * renderer, const SDL_Rect ** rects,
     data->glEnableClientState(GL_VERTEX_ARRAY);
     for (i = 0; i < count; ++i) {
         const SDL_Rect *rect = rects[i];
+
+#if defined(ANDROID)
+	//__android_log_print(ANDROID_LOG_INFO, "SDL_renderer_gles.c",
+	//		"GLES_RenderFillRects : %d, %d, %d, %d", rect->x, rect->y, rect->w, rect->h);
+#endif
+
         GLshort minx = rect->x;
         GLshort maxx = rect->x + rect->w;
         GLshort miny = rect->y;
@@ -809,6 +835,11 @@ GLES_RenderCopy(SDL_Renderer * renderer, SDL_Texture * texture,
     int i;
     void *temp_buffer;          /* used for reformatting dirty rect pixels */
     void *temp_ptr;
+
+#if defined(ANDROID)
+	//__android_log_print(ANDROID_LOG_INFO, "SDL_renderer_gles.c",
+	//	"GLES_RenderCopy - ");
+#endif
 
     data->glEnable(GL_TEXTURE_2D);
 
@@ -946,6 +977,10 @@ GLES_RenderCopy(SDL_Renderer * renderer, SDL_Texture * texture,
 static void
 GLES_RenderPresent(SDL_Renderer * renderer)
 {
+#if defined(ANDROID)
+	//__android_log_print(ANDROID_LOG_INFO, "SDL_renderer_gles.c",
+	//	"GLES_RenderPresent - ");
+#endif
     SDL_GL_SwapWindow(renderer->window);
 }
 

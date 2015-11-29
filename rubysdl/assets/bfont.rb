@@ -6,7 +6,8 @@ screen = SDL::Screen.open(640,480,16,SDL::SWSURFACE)
 font = SDL::BMFont.open("font.bmp",SDL::BMFont::TRANSPARENT)
 
 y = 0
-
+black = screen.format.map_rgb(0,0,0)
+#black = screen.format.map_rgb(0,0,255)
 while true
   while event = SDL::Event.poll
     case event
@@ -14,7 +15,8 @@ while true
       exit
     end
   end
-  screen.fill_rect(0,0,640,480,0)
+  #screen.fill_rect(0,0,640,480,0)
+  screen.fill_rect(0,0,640,480,black)
 
   y = (y + 1) % 480
   font.textout(screen,"BitMapFont Testing..",40,y)

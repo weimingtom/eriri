@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
 	if (script == NULL) {
 		script = 
 			//"testsprite.rb";
-			"stetris.rb";
+			//"stetris.rb";
 			//"sgetest.rb";
 			//"randrect.rb";
 			//"fpstimer.rb";
@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
 			//"collision.rb";
 			//"bfont.rb";
 			//"alphadraw.rb";
-			//"alpha.rb";
+			"alpha.rb";
 			//"aadraw.rb";
 			//"test_fib.rb";
 	}

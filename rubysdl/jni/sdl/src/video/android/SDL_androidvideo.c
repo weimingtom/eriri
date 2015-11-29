@@ -197,6 +197,12 @@ static inline int CallJavaSwapBuffers()
 
 void ANDROID_GL_SwapBuffers(_THIS, SDL_Window * window)
 {
+	//from SDL_rederer_gles.c / GLES_RenderPresent
+	//from SDL_video.c / SDL_GL_SwapWindow
+#if defined(ANDROID)
+	//__android_log_print(ANDROID_LOG_INFO, "libSDL",
+	//	"ANDROID_GL_SwapBuffers - ");
+#endif
 	CallJavaSwapBuffers();
 };
 

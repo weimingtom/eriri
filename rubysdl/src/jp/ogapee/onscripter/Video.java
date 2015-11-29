@@ -58,10 +58,16 @@ class DemoRenderer extends GLSurfaceView_SDL.Renderer {
 	@Override
 	public void onSurfaceCreated(GL10 gl, EGLConfig config) {
 		// nativeInit();
+		if (D) {
+			Log.d(TAG, "onSurfaceCreated :");
+		}
 	}
 
 	@Override
 	public void onSurfaceChanged(GL10 gl, int w, int h) {
+		if (D) {
+			Log.d(TAG, "onSurfaceChanged : w = " + w + ", h = " + h);
+		}
 		// gl.glViewport(0, 0, w, h);
 		gl.glMatrixMode(GL10.GL_PROJECTION);
 		gl.glLoadIdentity();
@@ -74,11 +80,14 @@ class DemoRenderer extends GLSurfaceView_SDL.Renderer {
 
 	@Override
 	public void onDrawFrame(GL10 gl) {
+		if (D) {
+			Log.d(TAG, "onDrawFrame :");
+		}
 		nativeInitJavaCallbacks();
 		nativeInit(ONScripter.gCurrentDirectoryPath, 
 			false,
 			ONScripter.gDisableRescale, 
-			"testsprite.rb"
+			//"testsprite.rb"
 			//"stetris.rb"
 			//"sgetest.rb"
 			//"randrect.rb"
@@ -89,7 +98,7 @@ class DemoRenderer extends GLSurfaceView_SDL.Renderer {
 			//"collision.rb"
 			//"bfont.rb"
 			//"alphadraw.rb"
-			//"alpha.rb"
+			"alpha.rb"
 			//"aadraw.rb"
 			//"test_fib.rb"
 		);
@@ -154,7 +163,7 @@ class DemoRenderer extends GLSurfaceView_SDL.Renderer {
 			while (null != (line = rbuf.readLine())) {
 				sb.append(line);
 				if (D) {
-					Log.e(TAG, "readfile " + filename + " return ====> " + line);
+					Log.i(TAG, "readfile " + filename + " return ====> " + line);
 				}
 				sb.append("\n");
 			}
@@ -184,7 +193,7 @@ class DemoRenderer extends GLSurfaceView_SDL.Renderer {
 			}
 		}
 //		if (D) {
-//			Log.e(TAG, "readfile " + filename + " return ====> " + sb.toString());
+//			Log.i(TAG, "readfile " + filename + " return ====> " + sb.toString());
 //		}
 		return sb.toString();
     }
@@ -214,13 +223,13 @@ class DemoRenderer extends GLSurfaceView_SDL.Renderer {
 					e.printStackTrace();
 				}
 				if (D) {
-					Log.e(TAG, "isfileexist return 1 : " + filename);
+					Log.i(TAG, "isfileexist return 1 : " + filename);
 				}
 				return 1;
 			}
 		}
 		if (D) {
-			Log.e(TAG, "isfileexist return 0 : " + filename);
+			Log.i(TAG, "isfileexist return 0 : " + filename);
 		}
 		return 0;
 	}

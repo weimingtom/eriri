@@ -2,7 +2,8 @@ require 'sdl'
 
 SDL.init( SDL::INIT_VIDEO )
 screen = SDL::Screen.open(640,480,16,SDL::SWSURFACE)
-SDL::WM::set_caption('collision.rb','collision.rb icon')
+#SDL::WM::set_caption('collision.rb','collision.rb icon')
+SDL::WM::set_caption('collision.rb','collision.rb')
 $image = SDL::Surface.load_bmp("icon.bmp")
 $image.set_color_key( SDL::SRCCOLORKEY ,0)
 $image = $image.display_format

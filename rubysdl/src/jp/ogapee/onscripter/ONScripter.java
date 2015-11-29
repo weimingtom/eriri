@@ -32,12 +32,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
-import android.view.View.OnClickListener;
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -47,6 +46,9 @@ import com.iteye.weimingtom.rubysdl.R;
 
 public class ONScripter extends Activity implements
 		AdapterView.OnItemClickListener, Runnable {
+	private final static boolean D = true;
+	private final static String TAG = "ONScripter";
+	
 	private File mCurrentDirectory = null;
 	private File mOldCurrentDirectory = null;
 	private File[] mDirectoryFiles = null;
@@ -55,11 +57,7 @@ public class ONScripter extends Activity implements
 	private byte[] buf = null;
 	private int screen_w, screen_h;
 	private int button_w, button_h;
-	private Button btn1, btn2, btn3, btn4, btn5, btn6;
 	private LinearLayout layout = null;
-	private LinearLayout layout1 = null;
-	private LinearLayout layout2 = null;
-	private LinearLayout layout3 = null;
 	private boolean mIsLandscape = true;
 	private boolean mButtonVisible = true;
 	private boolean mScreenCentered = false;
@@ -292,6 +290,9 @@ public class ONScripter extends Activity implements
 	 * FIXME: main entry
 	 */
 	private void runSDLApp() {
+//		this.setContentView(R.layout.main);
+//		layout = (LinearLayout)this.findViewById(R.id.linearLayoutTop);
+		
 		//nativeInitJavaCallbacks();
 		mAudioThread = new AudioThread(this);
 		mGLView = new DemoGLSurfaceView(this);
@@ -299,16 +300,18 @@ public class ONScripter extends Activity implements
 		mGLView.setFocusable(true);
 		mGLView.requestFocus();
 		int game_width = nativeGetWidth();
-		int game_height = nativeGetHeight();
+		int game_height = nativeGetHeight(); //240;//
 		Display disp = ((WindowManager) this
 				.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
 		int dw = disp.getWidth();
 		int dh = disp.getHeight();
+		int myw = layout.getWidth();
+		int myh = layout.getHeight();
 		screen_w = dw;
 		screen_h = dh;
 		mIsLandscape = true;
 		if (dw * game_height >= dh * game_width) {
-			screen_w = (dh * game_width / game_height) & (~0x01); // to be 2								// aligned
+			screen_w = (dh * game_width / game_height);// & (~0x01); // to be 2 aligned
 			button_w = dw - screen_w;
 			button_h = dh / 4;
 		} else {
@@ -317,66 +320,17 @@ public class ONScripter extends Activity implements
 			button_w = dw / 4;
 			button_h = dh - screen_h;
 		}
-		btn1 = new Button(this);
-		btn1.setText(getResources().getString(R.string.button_rclick));
-		btn1.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				mGLView.nativeKey(KeyEvent.KEYCODE_BACK, 1);
-				mGLView.nativeKey(KeyEvent.KEYCODE_BACK, 0);
-			}
-		});
-		btn2 = new Button(this);
-		btn2.setText(getResources().getString(R.string.button_lclick));
-		btn2.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				mGLView.nativeKey(KeyEvent.KEYCODE_ENTER, 1);
-				mGLView.nativeKey(KeyEvent.KEYCODE_ENTER, 0);
-			}
-		});
-		btn3 = new Button(this);
-		btn3.setText(getResources().getString(R.string.button_up));
-		btn3.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				mGLView.nativeKey(KeyEvent.KEYCODE_DPAD_UP, 1);
-				mGLView.nativeKey(KeyEvent.KEYCODE_DPAD_UP, 0);
-			}
-		});
-		btn4 = new Button(this);
-		btn4.setText(getResources().getString(R.string.button_down));
-		btn4.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				mGLView.nativeKey(KeyEvent.KEYCODE_DPAD_DOWN, 1);
-				mGLView.nativeKey(KeyEvent.KEYCODE_DPAD_DOWN, 0);
-			}
-		});
-		btn5 = new Button(this); // dummy button for Android 1.6
-		btn5.setVisibility(View.INVISIBLE);
-		btn6 = new Button(this); // dummy button for Android 1.6
-		btn6.setVisibility(View.INVISIBLE);
-		layout = new LinearLayout(this);
-		layout1 = new LinearLayout(this);
-		layout2 = new LinearLayout(this);
-		layout3 = new LinearLayout(this);
-		if (mIsLandscape) {
-			layout2.setOrientation(LinearLayout.VERTICAL);
-		} else {
-			layout.setOrientation(LinearLayout.VERTICAL);
+		layout.setBackgroundResource(R.drawable.bg_tile_repeat);
+//		layout.setOrientation(LinearLayout.VERTICAL);
+		layout.addView(mGLView, new LinearLayout.LayoutParams(
+			LinearLayout.LayoutParams.MATCH_PARENT, 
+			LinearLayout.LayoutParams.MATCH_PARENT));
+		if (D) {
+			Log.e(TAG, "runSDLApp() : myw = " + myw + ",myh = " + myh + 
+				",dw=" + dw + ",dh=" + dh + 
+				",screen_w=" + screen_w + ",screen_h=" + screen_h);
 		}
-		layout1.addView(btn5);
-		layout.addView(layout1, 0);
-		layout.addView(mGLView, 1, new LinearLayout.LayoutParams(screen_w,
-				screen_h));
-		layout2.addView(btn1, 0);
-		layout2.addView(btn2, 1);
-		layout2.addView(btn3, 2);
-		layout2.addView(btn4, 3);
-		layout.addView(layout2, 2);
-		layout3.addView(btn6);
-		layout.addView(layout3, 3);
 		resetLayout();
-		setContentView(layout);
 		if (wakeLock == null) {
 			PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
 			wakeLock = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK,
@@ -386,57 +340,7 @@ public class ONScripter extends Activity implements
 	}
 
 	public void resetLayout() {
-		Display disp = ((WindowManager) this
-				.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-		int dw = disp.getWidth();
-		int dh = disp.getHeight();
-		int bw = button_w, bh = button_h;
-		int w1 = 0, h1 = 0;
-		int w2 = dw, h2 = dh;
-		if (mIsLandscape == true) {
-			if (mScreenCentered) {
-				w1 = bw - bw / 2;
-				bw /= 2;
-			}
-			if (bw > bh * 4 / 3)
-				bw = bh * 4 / 3;
-			h1 = dh;
-			w2 = bw;
-		} else {
-			if (mScreenCentered) {
-				h1 = bh - bh / 2;
-				bh /= 2;
-			}
-			if (bh > bw * 3 / 4)
-				bh = bw * 3 / 4;
-			w1 = dw;
-			h2 = bh;
-		}
-		btn1.setMinWidth(bw);
-		btn1.setMinHeight(bh);
-		btn1.setWidth(bw);
-		btn1.setHeight(bh);
-		btn2.setMinWidth(bw);
-		btn2.setMinHeight(bh);
-		btn2.setWidth(bw);
-		btn2.setHeight(bh);
-		btn3.setMinWidth(bw);
-		btn3.setMinHeight(bh);
-		btn3.setWidth(bw);
-		btn3.setHeight(bh);
-		btn4.setMinWidth(bw);
-		btn4.setMinHeight(bh);
-		btn4.setWidth(bw);
-		btn4.setHeight(bh);
-		if (mButtonVisible) {
-			layout2.setVisibility(View.VISIBLE);
-		} else {
-			layout2.setVisibility(View.INVISIBLE);
-		}
-		layout.updateViewLayout(layout1, new LinearLayout.LayoutParams(w1, h1));
-		layout.updateViewLayout(layout2, new LinearLayout.LayoutParams(w2, h2));
-		layout.updateViewLayout(layout3, new LinearLayout.LayoutParams(dw
-				- screen_w - w1 - w2, dh - screen_h - h1 - h2));
+		
 	}
 
 	public void playVideo(char[] filename) {
@@ -481,7 +385,20 @@ public class ONScripter extends Activity implements
 			runCopier();
 		}
 		*/
-		this.runSDLApp();
+		this.setContentView(R.layout.main);
+		layout = (LinearLayout)this.findViewById(R.id.linearLayoutTop);
+		layout.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+            	runSDLApp();
+            	try {
+            		layout.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+            	} catch (Throwable e) {
+            		e.printStackTrace();
+            	}
+            }
+		});
+//		this.runSDLApp();
 	}
 
 	@Override
@@ -655,6 +572,29 @@ public class ONScripter extends Activity implements
 		handler.sendMessage(msg);
 	}
 
+	
+	public void onBtn1Click(View v) {
+//		mGLView.nativeKey(KeyEvent.KEYCODE_BACK, 1);
+//		mGLView.nativeKey(KeyEvent.KEYCODE_BACK, 0);
+		mGLView.nativeKey(KeyEvent.KEYCODE_DPAD_RIGHT, 0);
+		mGLView.nativeKey(KeyEvent.KEYCODE_DPAD_RIGHT, 1);
+	}
+	public void onBtn2Click(View v) {
+//		mGLView.nativeKey(KeyEvent.KEYCODE_ENTER, 1);
+//		mGLView.nativeKey(KeyEvent.KEYCODE_ENTER, 0);
+		mGLView.nativeKey(KeyEvent.KEYCODE_DPAD_LEFT, 0);
+		mGLView.nativeKey(KeyEvent.KEYCODE_DPAD_LEFT, 1);
+	}
+	public void onBtn3Click(View v) {
+		mGLView.nativeKey(KeyEvent.KEYCODE_DPAD_UP, 1);
+		mGLView.nativeKey(KeyEvent.KEYCODE_DPAD_UP, 0);
+	}
+	public void onBtn4Click(View v) {
+		mGLView.nativeKey(KeyEvent.KEYCODE_DPAD_DOWN, 1);
+		mGLView.nativeKey(KeyEvent.KEYCODE_DPAD_DOWN, 0);
+	}
+	
+	
 	private DemoGLSurfaceView mGLView = null;
 	private AudioThread mAudioThread = null;
 	private PowerManager.WakeLock wakeLock = null;

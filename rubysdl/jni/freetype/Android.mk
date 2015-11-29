@@ -50,7 +50,7 @@ LOCAL_SRC_FILES += src/type42/type42.c
 LOCAL_SRC_FILES += src/winfonts/winfnt.c
 
 LOCAL_SRC_FILES += src/base/ftsystem.c src/base/ftdebug.c src/base/ftinit.c
-LOCAL_SRC_FILES += src/base/ftbase.c src/base/ftbbox.c src/base/ftbdf.c
+LOCAL_SRC_FILES += src/base/ftbbox.c src/base/ftbdf.c
 LOCAL_SRC_FILES += src/base/ftbitmap.c src/base/ftcid.c src/base/ftfstype.c
 LOCAL_SRC_FILES += src/base/ftgasp.c src/base/ftglyph.c src/base/ftgxval.c
 LOCAL_SRC_FILES += src/base/ftlcdfil.c src/base/ftmm.c src/base/ftotval.c
