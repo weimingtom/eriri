@@ -40,3 +40,6 @@ https://github.com/luisbebop/hello-jni
 * rubyjni can require .so in script file (but in fact not).  
 * keyboard event.  
 * color key.  
+
+## etc ruby relatived script engine  
+* https://github.com/chrisseaton/rhizome  
