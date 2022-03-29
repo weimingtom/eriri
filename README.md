@@ -50,3 +50,21 @@ https://github.com/luisbebop/hello-jni
 ## YARV  
 * http://www.atdot.net/yarv/  
 * see https://ja.wikipedia.org/wiki/Ruby  
+
+## ruby-implementations  
+* https://github.com/codicoscepticos/ruby-implementations  
+* https://qiita.com/takeyuweb/items/ea7b42746152f03efdaa#rubiniusるびにうす  
+* https://www.ruby.or.jp/ja/tech/install/ruby/implementations.html  
+
+## hotruby (for as3)    
+* https://github.com/weimingtom/hotruby  
+* https://github.com/weimingtom/hotruby_playground  
+
+## xruby (compile rb to jar)  
+* https://github.com/weimingtom/xruby  
+
+## CoffeeScript (see VNMaker)  
+* https://coffeescript.org  
+* see VN Maker  
+* https://github.com/jashkenas/coffeescript  
+
