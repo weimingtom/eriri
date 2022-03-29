@@ -43,3 +43,10 @@ https://github.com/luisbebop/hello-jni
 
 ## etc ruby relatived script engine  
 * https://github.com/chrisseaton/rhizome  
+
+## RUBY COOKBOOK  
+* see baidupan  
+
+## YARV  
+* http://www.atdot.net/yarv/  
+* see https://ja.wikipedia.org/wiki/Ruby  
